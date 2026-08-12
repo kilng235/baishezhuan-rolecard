@@ -1,0 +1,332 @@
+{
+  "projectName": "白蛇传",
+  "worldbookName": "白蛇传",
+  "form": "charactercard",
+  "mvu": true,
+  "entryManifest": {
+    "世界观": {},
+    "扮演准则": {},
+    "时间线": {},
+    "地理": {},
+    "角色": {
+      "白素贞_基础信息": {
+        "scope": "specific",
+        "part": "basic",
+        "keywords": [
+          "白素贞",
+          "白娘子"
+        ],
+        "abstract": "白素贞的基础信息：千年白蛇化形，青城山修行，观音点化下山报恩，恩人为<user>转世",
+        "contents": [
+          {
+            "content": "---\n<character_basic character=\"白素贞\">"
+          },
+          {
+            "file": "世界书/角色/白素贞/基础信息.yaml"
+          },
+          {
+            "content": "</character_basic>"
+          }
+        ]
+      },
+      "白素贞_性格调色盘": {
+        "scope": "specific",
+        "part": "personality",
+        "keywords": [
+          "白素贞",
+          "白娘子"
+        ],
+        "abstract": "白素贞的性格调色盘：底色温婉，主色调聪慧果敢有主见、端庄贤淑、通透清醒，点缀蛇性本淫",
+        "contents": [
+          {
+            "content": "---\n<character_personality character=\"白素贞\">"
+          },
+          {
+            "file": "世界书/角色/白素贞/性格调色盘.yaml"
+          },
+          {
+            "content": "</character_personality>"
+          }
+        ]
+      },
+      "白素贞_三面性": {
+        "scope": "specific",
+        "part": "tri_faceted",
+        "keywords": [
+          "白素贞",
+          "白娘子"
+        ],
+        "abstract": "白素贞的三面性：市井人间的白娘子、独处妖界的千年蛇仙、许仙面前情爱中的女子",
+        "contents": [
+          {
+            "content": "---\n<character_tri_faceted character=\"白素贞\">"
+          },
+          {
+            "file": "世界书/角色/白素贞/三面性.yaml"
+          },
+          {
+            "content": "</character_tri_faceted>"
+          }
+        ]
+      },
+      "小青_基础信息": {
+        "scope": "specific",
+        "part": "basic",
+        "keywords": [
+          "小青"
+        ],
+        "abstract": "小青的基础信息：青城山青蛇精，白素贞义妹，随姐下山；与姐姐共同喜欢<user>，二女共侍一夫",
+        "contents": [
+          {
+            "content": "---\n<character_basic character=\"小青\">"
+          },
+          {
+            "file": "世界书/角色/小青/基础信息.yaml"
+          },
+          {
+            "content": "</character_basic>"
+          }
+        ]
+      },
+      "小青_性格调色盘": {
+        "scope": "specific",
+        "part": "personality",
+        "keywords": [
+          "小青"
+        ],
+        "abstract": "小青的性格调色盘：底色野与俏皮，主色调爽直护短机敏，点缀依赖情动蛇性",
+        "contents": [
+          {
+            "content": "---\n<character_personality character=\"小青\">"
+          },
+          {
+            "file": "世界书/角色/小青/性格调色盘.yaml"
+          },
+          {
+            "content": "</character_personality>"
+          }
+        ]
+      },
+      "小青_三面性": {
+        "scope": "specific",
+        "part": "tri_faceted",
+        "keywords": [
+          "小青"
+        ],
+        "abstract": "小青的三面性：人前的许家小姑奶奶、独处的青蛇本相、许仙面前的情妹妹",
+        "contents": [
+          {
+            "content": "---\n<character_tri_faceted character=\"小青\">"
+          },
+          {
+            "file": "世界书/角色/小青/三面性.yaml"
+          },
+          {
+            "content": "</character_tri_faceted>"
+          }
+        ]
+      },
+      "许仙_基础信息": {
+        "part": "basic",
+        "scope": "specific",
+        "abstract": "许仙（字汉文）：<user>扮演，保和堂伙计，白素贞前世恩人转世，忠厚温良",
+        "contents": [
+          {
+            "content": "---\n<character_basic character=\"许仙\">"
+          },
+          {
+            "file": "世界书/角色/许仙/基础信息.yaml"
+          },
+          {
+            "content": "</character_basic>"
+          }
+        ],
+        "keywords": [
+          "许仙",
+          "汉文",
+          "官人"
+        ]
+      }
+    },
+    "NPC": {
+      "许娇容": {
+        "scope": "specific",
+        "part": "",
+        "keywords": [
+          "许娇容",
+          "姐姐",
+          "许姐"
+        ],
+        "abstract": "许娇容：许仙之姐，嫁与捕快李公甫，开茶楼，长姐如母，对<user>热情",
+        "contents": [
+          {
+            "content": "---\n<character_basic character=\"许娇容\">"
+          },
+          {
+            "file": "世界书/NPC/许娇容.yaml"
+          },
+          {
+            "content": "</character_basic>"
+          }
+        ]
+      },
+      "李公甫": {
+        "scope": "specific",
+        "part": "",
+        "keywords": [
+          "李公甫",
+          "姐夫",
+          "李捕快"
+        ],
+        "abstract": "李公甫：钱塘捕快，许娇容之夫，憨直粗豪惧内，怕蛇",
+        "contents": [
+          {
+            "content": "---\n<character_basic character=\"李公甫\">"
+          },
+          {
+            "file": "世界书/NPC/李公甫.yaml"
+          },
+          {
+            "content": "</character_basic>"
+          }
+        ]
+      },
+      "法海": {
+        "scope": "specific",
+        "part": "",
+        "keywords": [
+          "法海",
+          "金山寺住持",
+          "大师"
+        ],
+        "abstract": "法海：金山寺住持，有道高僧，视妖为孽，对白素贞穷追不舍，与<user>对立",
+        "contents": [
+          {
+            "content": "---\n<character_basic character=\"法海\">"
+          },
+          {
+            "file": "世界书/NPC/法海.yaml"
+          },
+          {
+            "content": "</character_basic>"
+          }
+        ]
+      }
+    }
+  },
+  "typeLists": {
+    "before_char": [
+      "世界观",
+      "扮演准则",
+      "时间线",
+      "地理"
+    ],
+    "after_char": [
+      "角色",
+      "NPC"
+    ],
+    "depth": [
+      "事件",
+      "MVU"
+    ]
+  },
+  "strategyThresholds": {
+    "角色": {
+      "basic": {
+        "threshold": 5,
+        "required": true
+      },
+      "other": {
+        "threshold": 2,
+        "required": false
+      },
+      "personality": {
+        "threshold": 2,
+        "required": true
+      },
+      "tri_faceted": {
+        "threshold": 2,
+        "required": false
+      }
+    },
+    "事件": 0,
+    "地理": {
+      "faction": {
+        "threshold": 4,
+        "required": false
+      },
+      "region": {
+        "threshold": 4,
+        "required": false
+      },
+      "scene": {
+        "threshold": 4,
+        "required": false
+      }
+    },
+    "MVU": {
+      "initvar": {
+        "threshold": null,
+        "required": false
+      },
+      "output_format": {
+        "threshold": "Infinity",
+        "required": false
+      },
+      "update_rules": {
+        "threshold": "Infinity",
+        "required": false
+      },
+      "variable_list": {
+        "threshold": "Infinity",
+        "required": false
+      }
+    },
+    "NPC": 0,
+    "扮演准则": "Infinity",
+    "时间线": {
+      "history": {
+        "threshold": "Infinity",
+        "required": false
+      },
+      "plot": {
+        "threshold": "Infinity",
+        "required": false
+      }
+    },
+    "世界观": "Infinity"
+  },
+  "partOrder": {
+    "角色": [
+      "basic",
+      "personality",
+      "tri_faceted",
+      "other"
+    ],
+    "地理": [
+      "region",
+      "scene",
+      "faction"
+    ],
+    "MVU": [
+      "variable_list",
+      "update_rules",
+      "output_format",
+      "initvar"
+    ],
+    "时间线": [
+      "history",
+      "plot"
+    ]
+  },
+  "depth_defaults": {
+    "role": "system",
+    "depth": 0
+  },
+  "description": "",
+  "first_messages": [],
+  "creator": "",
+  "creator_notes": "",
+  "version": "1.0",
+  "create_date": "2026-08-11T16:05:08.681Z"
+}
