@@ -1,7 +1,87 @@
-```
-<body>
+<style>
+  .gufeng-bar{--ink:#1a1a1a;--r:#b83232;--g:#a08030;--b:#12284a;--bd:#c8b898;--bg:rgba(255,255,255,.35);font-family:"楷体","KaiTi","STKaiti",serif;max-width:640px;margin:16px auto;background:#f6f1e8;border:1px solid var(--bd);border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:0;overflow:hidden;color:var(--ink);font-size:13px;line-height:1.8;position:relative}
+  .gufeng-bar::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(180,160,130,.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(180,160,130,.06) 0%,transparent 50%);pointer-events:none}
+  .gufeng-bar::after{content:"";display:block;height:1px;background:linear-gradient(90deg,transparent,var(--r),transparent);margin:0 -24px 16px}
+
+  .gf-header{display:flex;justify-content:space-between;align-items:center;padding:12px 24px;border-bottom:1px solid var(--bd);font-size:13px;color:#8b7355}
+  .gf-header .gf-title{font-size:15px;font-weight:bold;color:var(--b);letter-spacing:3px}
+  .gf-header .gf-date{color:var(--r);font-weight:bold;font-size:13px}
+
+  .gf-char{margin:16px 24px;padding:0 0 12px;border-bottom:1px solid var(--bd)}
+  .gf-char:last-child{border-bottom:none;margin-bottom:0}
+  .gf-char-name{font-size:14px;font-weight:bold;color:var(--b);margin-bottom:4px;letter-spacing:1px}
+  .gf-char-name .gf-loc{font-weight:normal;font-size:12px;color:#8b7355;margin-left:8px}
+
+  .gf-aff{display:flex;align-items:center;gap:4px;margin:6px 0 10px;font-size:12px;color:#8b7355}
+  .gf-aff-label{color:var(--r);font-size:13px;margin-right:4px}
+  .gf-dot{width:10px;height:10px;border-radius:50%;background:#ddd;border:1px solid #ccc;display:inline-block;transition:all .3s}
+  .gf-dot.filled{background:var(--r);border-color:var(--r)}
+  .gf-dot.half{background:linear-gradient(90deg,var(--r) 50%,#ddd 50%);border-color:var(--r)}
+  .gf-aff-num{margin-left:8px;font-family:monospace;font-size:11px;color:#aaa}
+
+  .gf-sec{margin:8px 0;background:var(--bg);border:1px solid rgba(200,184,154,.4);border-radius:3px;padding:10px 14px}
+  .gf-sec-title{font-size:12px;color:var(--r);font-weight:bold;margin-bottom:4px;padding-left:10px;border-left:3px solid var(--r);letter-spacing:2px}
+  .gf-sec-body{font-size:14px;line-height:2;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+
+  .gf-footer{text-align:center;padding:10px;font-size:11px;color:var(--r);letter-spacing:2px;border-top:1px solid rgba(200,184,154,.3);font-style:italic}
+</style>
+
+<div class="gufeng-bar">
+  <div class="gf-header">
+    <span class="gf-title">◆ 白蛇传 ◇</span>
+    <span class="gf-date" id="gf-date"></span>
+  </div>
+
+  <div class="gf-char">
+    <div class="gf-char-name">白素贞<span class="gf-loc" id="gf-bz-loc"></span></div>
+    <div class="gf-aff">
+      <span class="gf-aff-label">心意</span>
+      <span id="gf-bz-dots"></span>
+      <span class="gf-aff-num" id="gf-bz-num"></span>
+    </div>
+    <div class="gf-sec"><div class="gf-sec-title">外貌</div><div class="gf-sec-body" id="gf-bz-appear"></div></div>
+    <div class="gf-sec"><div class="gf-sec-title">服饰</div><div class="gf-sec-body" id="gf-bz-clothes"></div></div>
+    <div class="gf-sec"><div class="gf-sec-title">姿势</div><div class="gf-sec-body" id="gf-bz-pose"></div></div>
+  </div>
+
+  <div class="gf-char">
+    <div class="gf-char-name">小青<span class="gf-loc" id="gf-xq-loc"></span></div>
+    <div class="gf-aff">
+      <span class="gf-aff-label">心意</span>
+      <span id="gf-xq-dots"></span>
+      <span class="gf-aff-num" id="gf-xq-num"></span>
+    </div>
+    <div class="gf-sec"><div class="gf-sec-title">外貌</div><div class="gf-sec-body" id="gf-xq-appear"></div></div>
+    <div class="gf-sec"><div class="gf-sec-title">服饰</div><div class="gf-sec-body" id="gf-xq-clothes"></div></div>
+    <div class="gf-sec"><div class="gf-sec-title">姿势</div><div class="gf-sec-body" id="gf-xq-pose"></div></div>
+  </div>
+
+  <div class="gf-footer">—— 古卷残页 · 未完待续 ——</div>
+</div>
+
 <script>
-$('body').load('https://testingcf.jsdelivr.net/gh/GH_NAME/GH_PROJECT_NAME/dist/PROJECT_NAME/界面/状态栏/index.html')
+(function(){
+  function gvar(p){try{var v=getvar('stat_data.'+p);return(v===undefined||v===null)?'':String(v)}catch(e){return''}}
+  function dots(id,nid,val){
+    var n=Math.max(0,Math.min(100,parseInt(val)||0));
+    var f=Math.floor(n/10),h=(n%10)>=5,s='';
+    for(var i=0;i<10;i++){if(i<f)s+='<span class="gf-dot filled"></span>';else if(i===f&&h)s+='<span class="gf-dot half"></span>';else s+='<span class="gf-dot"></span>';}
+    document.getElementById(id).innerHTML=s;
+    document.getElementById(nid).textContent=n+' / 100';
+  }
+  function render(){
+    document.getElementById('gf-date').textContent=gvar('系统变量.日期')+'　'+gvar('系统变量.时间段');
+    document.getElementById('gf-bz-loc').textContent='◆ '+gvar('白素贞.当前位置');
+    dots('gf-bz-dots','gf-bz-num',gvar('白素贞.好感度'));
+    document.getElementById('gf-bz-appear').textContent=gvar('白素贞.外貌');
+    document.getElementById('gf-bz-clothes').textContent=gvar('白素贞.服饰');
+    document.getElementById('gf-bz-pose').textContent=gvar('白素贞.姿势');
+    document.getElementById('gf-xq-loc').textContent='◆ '+gvar('小青.当前位置');
+    dots('gf-xq-dots','gf-xq-num',gvar('小青.好感度'));
+    document.getElementById('gf-xq-appear').textContent=gvar('小青.外貌');
+    document.getElementById('gf-xq-clothes').textContent=gvar('小青.服饰');
+    document.getElementById('gf-xq-pose').textContent=gvar('小青.姿势');
+  }
+  render();setTimeout(render,500);setTimeout(render,1500);
+})();
 </script>
-</body>
-```
