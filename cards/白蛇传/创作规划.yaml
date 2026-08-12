@@ -148,6 +148,16 @@ entries:
     type: NPC
     path: 世界书/NPC/李公甫.yaml
     purpose: 钱塘捕快，许家日常的调和角色
+  - name: 白素贞_声音设计
+    type: 角色
+    part: other
+    path: 世界书/角色/白素贞/声音设计.yaml
+    purpose: 白素贞的声音设计：清润如玉、节奏慢、对仗句、文言色彩、温柔克制
+  - name: 小青_声音设计
+    type: 角色
+    part: other
+    path: 世界书/角色/小青/声音设计.yaml
+    purpose: 小青的声音设计：脆亮带野气、节奏快、短句连珠、口语化、嘴硬护姐
 
 mvu:
   structure: |
@@ -194,12 +204,16 @@ mvu:
       description: 小青当前面容、表情、身体可见痕迹（吻痕/咬痕/汗渍/脸红等）
     - path: 小青.姿势
       description: 小青当前姿势（站/坐/卧/蹲/抱臂等）
+    - path: 白素贞.心理
+      description: 白素贞当前内心活动（含情绪、动机、回忆、未说出口的话）
+    - path: 小青.心理
+      description: 小青当前内心活动（含对姐姐的护短、对陌生人的打量、自己的小心思）
 
 first_messages:
   - format: 叙事式
     word_count: 500~700
     output_path: 开场白/0.txt
     scene: 西湖断桥，清明春雨
-    opening_situation: |            # 待细化
+    opening_situation: |
       清明时节，西湖游船遇雨，<user>（许仙）在断桥避雨。
       白素贞携小青撑油纸伞款款而来，因一段旧缘，雨中断桥初相逢。

@@ -358,6 +358,67 @@
           "type": "after_character_definition",
           "order": 56
         }
+      },
+      "白素贞_声音设计": {
+        "scope": "specific",
+        "part": "other",
+        "keywords": [
+          "白素贞",
+          "白娘子",
+          "声音",
+          "语气",
+          "台词"
+        ],
+        "abstract": "白素贞的声音设计：清润如玉、节奏慢、对仗句、文言色彩、温柔克制",
+        "contents": [
+          {
+            "content": "---\n<character_other character=\"白素贞\" part=\"声音设计\">"
+          },
+          {
+            "file": "世界书/角色/白素贞/声音设计.yaml"
+          },
+          {
+            "content": "</character_other>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 60
+        }
+      },
+      "小青_声音设计": {
+        "scope": "specific",
+        "part": "other",
+        "keywords": [
+          "小青",
+          "声音",
+          "语气",
+          "台词"
+        ],
+        "abstract": "小青的声音设计：脆亮带野气、节奏快、短句连珠、口语化、嘴硬护姐",
+        "contents": [
+          {
+            "content": "---\n<character_other character=\"小青\" part=\"声音设计\">"
+          },
+          {
+            "file": "世界书/角色/小青/声音设计.yaml"
+          },
+          {
+            "content": "</character_other>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 61
+        }
       }
     },
     "NPC": {
