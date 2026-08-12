@@ -1,0 +1,11 @@
+# 开发/工具目录
+.zcode/
+.patch-history/
+
+# 系统文件
+Thumbs.db
+.DS_Store
+
+# 临时文件
+*.tmp
+*.log

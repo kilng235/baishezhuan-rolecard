@@ -33,6 +33,39 @@
           "type": "before_character_definition",
           "order": 10
         }
+      },
+      "修行体系扩展": {
+        "scope": "catalog",
+        "part": "",
+        "keywords": [
+          "狐妖",
+          "狐修",
+          "鬼修",
+          "道术",
+          "茅山",
+          "女鬼",
+          "游魂"
+        ],
+        "abstract": "临安志怪世道的修行谱系：狐修（媚术/幻术）、鬼修（游魂/厉鬼）、道术（茅山符箓/雷法）",
+        "contents": [
+          {
+            "content": "---\n<worldview>"
+          },
+          {
+            "file": "世界书/世界观/修行体系扩展.yaml"
+          },
+          {
+            "content": "</worldview>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "before_character_definition",
+          "order": 11
+        }
       }
     },
     "扮演准则": {
@@ -147,6 +180,206 @@
         "position": {
           "type": "before_character_definition",
           "order": 40
+        }
+      },
+      "茅山派": {
+        "scope": "specific",
+        "part": "faction",
+        "keywords": [
+          "道士",
+          "茅山",
+          "符箓",
+          "捉妖",
+          "游方道士",
+          "道门"
+        ],
+        "abstract": "道门降妖势力：与金山寺形成对照，以符箓、罗盘、桃木剑为法器，理念为妖皆可杀不问善恶",
+        "contents": [
+          {
+            "content": "---\n<faction name=\"茅山派\">"
+          },
+          {
+            "file": "世界书/地理/茅山派.yaml"
+          },
+          {
+            "content": "</faction>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "selective",
+          "keys": [
+            "道士",
+            "茅山",
+            "符箓",
+            "捉妖",
+            "游方道士",
+            "道门"
+          ]
+        },
+        "position": {
+          "type": "before_character_definition",
+          "order": 41
+        }
+      },
+      "临安城隍庙": {
+        "scope": "specific",
+        "part": "faction",
+        "keywords": [
+          "城隍",
+          "判官",
+          "鬼差",
+          "冥界",
+          "阴司",
+          "生死簿"
+        ],
+        "abstract": "冥界驻人间之神：城隍掌管本地生死簿籍，对妖持中立态度，妖不犯法法不加妖",
+        "contents": [
+          {
+            "content": "---\n<faction name=\"临安城隍庙\">"
+          },
+          {
+            "file": "世界书/地理/临安城隍庙.yaml"
+          },
+          {
+            "content": "</faction>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "selective",
+          "keys": [
+            "城隍",
+            "判官",
+            "鬼差",
+            "冥界",
+            "阴司",
+            "生死簿"
+          ]
+        },
+        "position": {
+          "type": "before_character_definition",
+          "order": 42
+        }
+      },
+      "勾栏瓦舍": {
+        "scope": "specific",
+        "part": "scene",
+        "keywords": [
+          "勾栏",
+          "瓦舍",
+          "戏院",
+          "赌坊",
+          "酒肆",
+          "歌伎",
+          "苏媚娘"
+        ],
+        "abstract": "临安最热闹的娱乐场所：说书杂剧傀儡戏，三教九流汇聚，狐妖苏媚娘常在此出没",
+        "contents": [
+          {
+            "content": "---\n<scene name=\"勾栏瓦舍\">"
+          },
+          {
+            "file": "世界书/地理/勾栏瓦舍.yaml"
+          },
+          {
+            "content": "</scene>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "selective",
+          "keys": [
+            "勾栏",
+            "瓦舍",
+            "戏院",
+            "赌坊",
+            "酒肆",
+            "歌伎",
+            "苏媚娘"
+          ]
+        },
+        "position": {
+          "type": "before_character_definition",
+          "order": 43
+        }
+      },
+      "荒宅废园": {
+        "scope": "specific",
+        "part": "scene",
+        "keywords": [
+          "荒宅",
+          "废园",
+          "闹鬼",
+          "凶宅",
+          "秋棠",
+          "女鬼"
+        ],
+        "abstract": "临安城西废弃宅院：前朝富商旧居，因闹鬼荒废，女鬼秋棠的栖身之所",
+        "contents": [
+          {
+            "content": "---\n<scene name=\"荒宅废园\">"
+          },
+          {
+            "file": "世界书/地理/荒宅废园.yaml"
+          },
+          {
+            "content": "</scene>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "selective",
+          "keys": [
+            "荒宅",
+            "废园",
+            "闹鬼",
+            "凶宅",
+            "秋棠",
+            "女鬼"
+          ]
+        },
+        "position": {
+          "type": "before_character_definition",
+          "order": 44
+        }
+      },
+      "城隍庙": {
+        "scope": "specific",
+        "part": "scene",
+        "keywords": [
+          "城隍庙",
+          "求签",
+          "香火",
+          "阴司",
+          "解签"
+        ],
+        "abstract": "临安城隍庙：香火旺盛，求签问卜者络绎不绝，妖物不敢靠近，神威压制妖力",
+        "contents": [
+          {
+            "content": "---\n<scene name=\"城隍庙\">"
+          },
+          {
+            "file": "世界书/地理/城隍庙.yaml"
+          },
+          {
+            "content": "</scene>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "selective",
+          "keys": [
+            "城隍庙",
+            "求签",
+            "香火",
+            "阴司",
+            "解签"
+          ]
+        },
+        "position": {
+          "type": "before_character_definition",
+          "order": 45
         }
       }
     },
@@ -522,6 +755,82 @@
         "position": {
           "type": "after_character_definition",
           "order": 62
+        }
+      },
+      "苏媚娘": {
+        "scope": "specific",
+        "part": "",
+        "keywords": [
+          "苏媚娘",
+          "狐妖",
+          "歌伎",
+          "魅惑",
+          "勾栏"
+        ],
+        "abstract": "临安勾栏瓦舍的歌伎，实为修行五百年的狐妖，风情万种八面玲珑，与白素贞敬而远之",
+        "contents": [
+          {
+            "content": "---\n<character_basic character=\"苏媚娘\">"
+          },
+          {
+            "file": "世界书/NPC/苏媚娘.yaml"
+          },
+          {
+            "content": "</character_basic>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "selective",
+          "keys": [
+            "苏媚娘",
+            "狐妖",
+            "歌伎",
+            "魅惑",
+            "勾栏"
+          ]
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 63
+        }
+      },
+      "秋棠": {
+        "scope": "specific",
+        "part": "",
+        "keywords": [
+          "秋棠",
+          "女鬼",
+          "冤魂",
+          "荒宅",
+          "托梦"
+        ],
+        "abstract": "临安城西荒宅中的女鬼，生前为富商妾室含冤自缢，怨气未消无法投胎，白素贞知其冤屈",
+        "contents": [
+          {
+            "content": "---\n<character_basic character=\"秋棠\">"
+          },
+          {
+            "file": "世界书/NPC/秋棠.yaml"
+          },
+          {
+            "content": "</character_basic>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "selective",
+          "keys": [
+            "秋棠",
+            "女鬼",
+            "冤魂",
+            "荒宅",
+            "托梦"
+          ]
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 64
         }
       }
     },
