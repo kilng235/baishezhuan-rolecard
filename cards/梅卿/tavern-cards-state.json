@@ -187,7 +187,7 @@
             "content": "---\n<character_basic character=\"梅绛雪\">"
           },
           {
-            "file": "世界书/角色/梅卿/基础信息.yaml"
+            "file": "世界书/角色/梅绛雪/基础信息.yaml"
           },
           {
             "content": "</character_basic>"
@@ -215,7 +215,7 @@
             "content": "---\n<character_personality character=\"梅绛雪\">"
           },
           {
-            "file": "世界书/角色/梅卿/性格调色盘.yaml"
+            "file": "世界书/角色/梅绛雪/性格调色盘.yaml"
           },
           {
             "content": "</character_personality>"
@@ -247,7 +247,7 @@
             "content": "---\n<character_tri_faceted character=\"梅绛雪\">"
           },
           {
-            "file": "世界书/角色/梅卿/三面性.yaml"
+            "file": "世界书/角色/梅绛雪/三面性.yaml"
           },
           {
             "content": "</character_tri_faceted>"
@@ -281,7 +281,7 @@
             "content": "---\n<character_other character=\"梅绛雪\" part=\"声音设计\">"
           },
           {
-            "file": "世界书/角色/梅卿/声音设计.yaml"
+            "file": "世界书/角色/梅绛雪/声音设计.yaml"
           },
           {
             "content": "</character_other>"
@@ -500,7 +500,7 @@
   },
   "creator": "",
   "creator_notes": "",
-  "version": "2.2",
+  "version": "2.3",
   "create_date": "2026-08-13T00:00:00.000Z",
   "extensions": {
     "tavern_helper": {
