@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>白蛇传 · 古风状态栏</title>
 <style>
-  /* ===== 古风状态栏 - 事件驱动版 ===== */
+
   .gufeng-bar {
     --ink:       #1a1a1a;
-    --cinnabar:  #b83232;  /* 朱红 - 高好感 */
-    --ochre:     #a08030;  /* 金黄 - 中好感 */
-    --jade:      #2a7a5a;  /* 青碧 - 低好感 */
-    --bd:        #c8b898;  /* 米色边框 */
+    --cinnabar:  #b83232;
+    --ochre:     #a08030;
+    --jade:      #2a7a5a;
+    --bd:        #c8b898;
     --bg:        rgba(255,255,255,.35);
-    --paper:     #f6f1e8;  /* 宣纸底色 */
+    --paper:     #f6f1e8;
 
     font-family: "楷体","KaiTi","STKaiti",serif;
     max-width: 640px;
@@ -29,7 +29,6 @@
     line-height: 1.9;
     position: relative;
 
-    /* 宣纸纹理叠加 */
     background-image:
       repeating-linear-gradient(
         0deg,
@@ -42,7 +41,6 @@
       radial-gradient(ellipse at 80% 20%, rgba(180,160,130,.06) 0%, transparent 50%);
   }
 
-  /* 水墨渍装饰 - 右上角 */
   .gufeng-bar::before {
     content: "";
     position: absolute;
@@ -58,8 +56,6 @@
     pointer-events: none;
     z-index: 0;
   }
-
-  /* 水墨渍装饰 - 左下角 */
   .gufeng-bar::after {
     content: "";
     position: absolute;
@@ -75,17 +71,18 @@
     pointer-events: none;
     z-index: 0;
   }
-
-  /* 所有内容在装饰层之上 */
   .gufeng-bar > * { position: relative; z-index: 1; }
 
-  /* ===== 头部 ===== */
   .gf-header {
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--bd);
+    background: rgba(248,242,228,.5);
+  }
+  .gf-header-row1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 24px;
-    border-bottom: 1px solid var(--bd);
+    gap: 12px;
     font-size: 15px;
     color: #8b7355;
   }
@@ -95,19 +92,35 @@
     color: #12284a;
     letter-spacing: 3px;
   }
-  .gf-header .gf-date {
+
+  .gf-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(139,115,85,.3);
+    font-size: 13px;
+    color: #8b7355;
+  }
+  .gf-meta-item { display: inline-flex; align-items: center; gap: 4px; }
+  .gf-meta-item .gf-meta-label {
     color: var(--cinnabar);
     font-weight: bold;
-    font-size: 15px;
+    letter-spacing: 1px;
+  }
+  .gf-meta-item .gf-meta-label::after { content: "："; }
+  .gf-meta-item .gf-meta-value {
+    color: var(--ink);
+    font-family: "楷体","KaiTi","STKaiti",serif;
   }
 
-  /* ===== 角色区块 ===== */
   .gf-char {
     margin: 16px 24px;
     padding: 0 0 12px;
     border-bottom: 1px solid var(--bd);
   }
-  .gf-char:last-child { border-bottom: none; margin-bottom: 0; }
+  .gf-char:last-of-type { border-bottom: none; margin-bottom: 0; }
 
   .gf-char-name {
     font-size: 16px;
@@ -123,7 +136,6 @@
     margin-left: 8px;
   }
 
-  /* ===== 好感度指示器 ===== */
   .gf-aff {
     display: flex;
     align-items: center;
@@ -149,16 +161,12 @@
     border-color: currentColor;
     background: linear-gradient(90deg, currentColor 50%, #ddd 50%);
   }
-
-  /* 好感度颜色：低→青碧，中→金黄，高→朱红 */
   .gf-dot.level-low.filled  { background: var(--jade);  color: var(--jade);  }
   .gf-dot.level-low.half    { color: var(--jade);  }
   .gf-dot.level-mid.filled  { background: var(--ochre); color: var(--ochre); }
   .gf-dot.level-mid.half    { color: var(--ochre); }
   .gf-dot.level-high.filled { background: var(--cinnabar); color: var(--cinnabar); }
   .gf-dot.level-high.half   { color: var(--cinnabar); }
-
-  /* 好感度数字 */
   .gf-aff-num {
     margin-left: 8px;
     font-family: monospace;
@@ -166,7 +174,6 @@
     color: #aaa;
   }
 
-  /* ===== 信息区块 ===== */
   .gf-sec {
     margin: 8px 0;
     background: var(--bg);
@@ -192,19 +199,33 @@
     overflow-wrap: break-word;
   }
 
-  /* ===== 服饰分行 ===== */
+  .gf-sec-body.clothes {
+    max-height: 120px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(184,50,50,.4) transparent;
+    padding-right: 6px;
+  }
+  .gf-sec-body.clothes::-webkit-scrollbar { width: 6px; }
+  .gf-sec-body.clothes::-webkit-scrollbar-thumb { background: rgba(184,50,50,.4); border-radius: 3px; }
+  .gf-sec-body.clothes::-webkit-scrollbar-track { background: transparent; }
+
   .gf-clo-item {
     display: flex;
     gap: 8px;
     padding: 2px 0;
     line-height: 1.9;
+    align-items: flex-start;
   }
+  .gf-clo-item + .gf-clo-item { border-top: 1px dashed rgba(184,50,50,.15); margin-top: 2px; padding-top: 4px; }
   .gf-clo-label {
     flex-shrink: 0;
     min-width: 3.2em;
     color: var(--cinnabar);
     font-weight: bold;
     letter-spacing: 1px;
+    line-height: 1.9;
+    padding-top: 2px;
   }
   .gf-clo-label::after { content: "："; }
   .gf-clo-desc {
@@ -213,7 +234,6 @@
     overflow-wrap: break-word;
   }
 
-  /* ===== 心理区块（区别于外貌/服饰/姿势） ===== */
   .gf-sec.gf-sec-mind {
     background: rgba(122,84,42,.06);
     border-color: rgba(122,84,42,.25);
@@ -229,7 +249,6 @@
     color: #3a2c1e;
   }
 
-  /* ===== 页脚 ===== */
   .gf-footer {
     text-align: center;
     padding: 10px;
@@ -240,12 +259,12 @@
     font-style: italic;
   }
 
-  /* ===== 响应式：小屏适配 ===== */
   @media (max-width: 640px) {
     .gufeng-bar { font-size: 14px; margin: 8px auto; }
-    .gf-header { padding: 8px 12px; flex-wrap: wrap; gap: 4px; }
+    .gf-header { padding: 8px 12px; }
+    .gf-header-row1 { flex-wrap: wrap; gap: 4px; }
     .gf-header .gf-title { font-size: 16px; }
-    .gf-header .gf-date { font-size: 14px; }
+    .gf-meta { font-size: 12px; gap: 4px 10px; }
     .gf-char { margin: 12px 12px; }
     .gf-sec { padding: 8px 10px; }
     .gf-sec-body { font-size: 15px; }
@@ -262,9 +281,22 @@
 </style>
 
 <div class="gufeng-bar" role="region" aria-label="角色状态栏">
+
   <div class="gf-header">
-    <span class="gf-title">◆ 白蛇传 ◇</span>
-    <span class="gf-date" id="gf-date" aria-live="polite">1147-04-05　午后</span>
+    <div class="gf-header-row1">
+      <span class="gf-title">◆ 白蛇传 ◇</span>
+    </div>
+    <div class="gf-meta">
+      <span class="gf-meta-item">
+        <span class="gf-meta-label">时间</span><span class="gf-meta-value" id="gf-time">午后</span>
+      </span>
+      <span class="gf-meta-item">
+        <span class="gf-meta-label">年月</span><span class="gf-meta-value" id="gf-date">南宋绍兴十七年二月</span>
+      </span>
+      <span class="gf-meta-item">
+        <span class="gf-meta-label">天气</span><span class="gf-meta-value" id="gf-weather">细雨</span>
+      </span>
+    </div>
   </div>
 
   <div class="gf-char" role="region" aria-label="白素贞状态">
@@ -283,14 +315,14 @@
     </div>
     <div class="gf-sec">
       <div class="gf-sec-title">服饰</div>
-      <div class="gf-sec-body" id="gf-bz-clothes">
-        <span class="gf-clo-item"><span class="gf-clo-label">外衣</span><span class="gf-clo-desc">藕荷刻丝银线褙子,直领对襟,开衩至腰下,起花八团,腰身收得极窄,袖口和裙摆下沿微微洇了一片水色</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">内搭</span><span class="gf-clo-desc">月白软烟罗中衣领口滚一道银线,襟口微敞,锁骨若隐若现,胸前衣料撑起圆润弧度,衣襟处沾了几点细密的雨珠</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">贴身层</span><span class="gf-clo-desc">藕荷绸肚兜藕带系于颈后,裙内不着裈,以裳蔽体,尽掩于层层裙衫之下,不见分毫</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">下装</span><span class="gf-clo-desc">浅紫百褶裙腰头束紧,腰身盈盈一握,裙摆绣白兰,边缘微湿</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">鞋袜</span><span class="gf-clo-desc">藕荷罗袜齐踝,浅紫绣鞋绣紫莲,鞋面浅了一点雨星,尚不算湿透</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">发饰</span><span class="gf-clo-desc">云髻高绾,紫玉簪簪头雕莲花,鬓边一枝鹅黄绒花沾了几颗雨珠</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">配饰</span><span class="gf-clo-desc">腰系浅金宫绦垂一块羊脂玉佩</span></span>
+      <div class="gf-sec-body clothes" id="gf-bz-clothes">
+        <div class="gf-clo-item"><div class="gf-clo-label">外衣</div><div class="gf-clo-desc">藕荷刻丝银线褙子,直领对襟,开衩至腰下,起花八团,腰身收得极窄,袖口和裙摆下沿微微洇了一片水色</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">内搭</div><div class="gf-clo-desc">月白软烟罗中衣领口滚一道银线,襟口微敞,锁骨若隐若现,胸前衣料撑起圆润弧度,衣襟处沾了几点细密的雨珠</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">贴身层</div><div class="gf-clo-desc">藕荷绸肚兜藕带系于颈后,裙内不着裈,以裳蔽体,尽掩于层层裙衫之下,不见分毫</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">下装</div><div class="gf-clo-desc">浅紫百褶裙腰头束紧,腰身盈盈一握,裙摆绣白兰,边缘微湿</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">鞋袜</div><div class="gf-clo-desc">藕荷罗袜齐踝,浅紫绣鞋绣紫莲,鞋面浅了一点雨星,尚不算湿透</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">发饰</div><div class="gf-clo-desc">云髻高绾,紫玉簪簪头雕莲花,鬓边一枝鹅黄绒花沾了几颗雨珠</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">配饰</div><div class="gf-clo-desc">腰系浅金宫绦垂一块羊脂玉佩</div></div>
       </div>
     </div>
     <div class="gf-sec">
@@ -317,16 +349,16 @@
       <div class="gf-sec-title">外貌</div>
       <div class="gf-sec-body" id="gf-xq-appear">一张瓜子脸,眉眼灵动,笑起来颊边两个浅梨涡。瞳色刻意收敛装作寻常乌眼,只眼尾微微泛着一点翠色,像是戴了副薄薄的碧色琉璃目。嘴角微微翘着,方才冲那人喊了一嗓子,面上还带着几分促狭。发梢上挂着几滴细雨</div>
     </div>
-<div class="gf-sec">
+    <div class="gf-sec">
       <div class="gf-sec-title">服饰</div>
-      <div class="gf-sec-body" id="gf-xq-clothes">
-        <span class="gf-clo-item"><span class="gf-clo-label">外衣</span><span class="gf-clo-desc">鹅黄蝉翼纱褙子薄如蝉翼,风一过便掀起来,领口敞着未系,衣带松松挽个结,衫子上星星点点沾了几点雨珠</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">内搭</span><span class="gf-clo-desc">鹅黄细葛衫交领,袖口挽起半截,衣料绷在胸前鼓鼓撑起</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">贴身层</span><span class="gf-clo-desc">鹅黄绸肚兜,裙内不着裈,以裳蔽体,被外衫罗裙层层掩住,不见分毫</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">下装</span><span class="gf-clo-desc">鹅黄细葛裙裙摆垂落,边缘浅沾雨星,衣料轻盈不显湿重</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">鞋袜</span><span class="gf-clo-desc">绣鞋鹅黄面绣黄蝶,鞋面微湿。脚踝处用罗袜掩了大半那圈淡淡的青鳞纹,只余一线若隐若现</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">发饰</span><span class="gf-clo-desc">发髻松松挽着几缕青丝,鬓边一枝银钗雕成蝴蝶模样,钗头挂着几颗雨珠</span></span>
-        <span class="gf-clo-item"><span class="gf-clo-label">配饰</span><span class="gf-clo-desc">腕上一只细银镯沾了点水渍</span></span>
+      <div class="gf-sec-body clothes" id="gf-xq-clothes">
+        <div class="gf-clo-item"><div class="gf-clo-label">外衣</div><div class="gf-clo-desc">鹅黄蝉翼纱褙子薄如蝉翼,风一过便掀起来,领口敞着未系,衣带松松挽个结,衫子上星星点点沾了几点雨珠</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">内搭</div><div class="gf-clo-desc">鹅黄细葛衫交领,袖口挽起半截,衣料绷在胸前鼓鼓撑起</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">贴身层</div><div class="gf-clo-desc">鹅黄绸肚兜,裙内不着裈,以裳蔽体,被外衫罗裙层层掩住,不见分毫</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">下装</div><div class="gf-clo-desc">鹅黄细葛裙裙摆垂落,边缘浅沾雨星,衣料轻盈不显湿重</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">鞋袜</div><div class="gf-clo-desc">绣鞋鹅黄面绣黄蝶,鞋面微湿。脚踝处用罗袜掩了大半那圈淡淡的青鳞纹,只余一线若隐若现</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">发饰</div><div class="gf-clo-desc">发髻松松挽着几缕青丝,鬓边一枝银钗雕成蝴蝶模样,钗头挂着几颗雨珠</div></div>
+        <div class="gf-clo-item"><div class="gf-clo-label">配饰</div><div class="gf-clo-desc">腕上一只细银镯沾了点水渍</div></div>
       </div>
     </div>
     <div class="gf-sec">
@@ -343,81 +375,91 @@
 </div>
 
 <script type="module">
-/* 好感度圆点渲染（含色彩渐变）
-   颜色规则：低→青碧(jade)，中→金黄(ochre)，高→朱红(cinnabar) */
+
+function getStatData(){
+  var all = getAllVariables() || {};
+  var d = _.get(all, 'stat_data', {});
+  if (!d || Object.keys(d).length === 0) {
+    var m = getVariables({ type: 'message' }) || {};
+    d = _.get(m, 'stat_data', {});
+  }
+  return d || {};
+}
+
+function setText(id, val){
+  var el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+
 function dots(containerId, numId, val){
   var n = Math.max(0, Math.min(100, parseInt(val) || 0));
   var f = Math.floor(n / 10);
   var h = (n % 10) >= 5;
-  var s = '';
-
+  var box = document.getElementById(containerId);
+  if (!box) return;
+  box.textContent = '';
   for (var i = 0; i < 10; i++) {
-    var level;
-    if (i < 3)       level = 'level-low';   // 0-29  青碧
-    else if (i < 7)  level = 'level-mid';   // 30-69 金黄
-    else             level = 'level-high';  // 70-100 朱红
-
+    var dot = document.createElement('span');
+    var level = i < 3 ? 'level-low' : (i < 7 ? 'level-mid' : 'level-high');
     var cls = 'gf-dot ' + level;
-    if (i < f)            cls += ' filled';
+    if (i < f) cls += ' filled';
     else if (i === f && h) cls += ' half';
-
-    s += '<span class="' + cls + '"></span>';
+    dot.className = cls;
+    box.appendChild(dot);
   }
-
-  var el = document.getElementById(containerId);
   var numEl = document.getElementById(numId);
-  if (el) el.innerHTML = s;
   if (numEl) numEl.textContent = n + ' / 100';
 }
 
-/* 渲染服饰分行：从 stat_data 读取 7 个子键，生成分行 HTML */
 function renderClothes(d, prefix, containerId){
   var keys = ['外衣','内搭','贴身层','下装','鞋袜','发饰','配饰'];
-  var html = '';
+  var box = document.getElementById(containerId);
+  if (!box) return;
+  box.textContent = '';
   keys.forEach(function(k){
     var val = _.get(d, prefix + '.' + k, '');
-    if (val) {
-      html += '<span class="gf-clo-item"><span class="gf-clo-label">' + k + '</span><span class="gf-clo-desc">' + val + '</span></span>';
-    }
+    if (!val) return;
+    var item = document.createElement('div');
+    item.className = 'gf-clo-item';
+    var label = document.createElement('div');
+    label.className = 'gf-clo-label';
+    label.textContent = k;
+    var desc = document.createElement('div');
+    desc.className = 'gf-clo-desc';
+    desc.textContent = val;
+    item.appendChild(label);
+    item.appendChild(desc);
+    box.appendChild(item);
   });
-  $('#' + containerId).html(html);
 }
 
-/* 主渲染：从 stat_data 实时读取并填充
-   任何一步失败都保持 HTML 兜底默认值，不抛错中断 */
-function render(){
-  try {
-    var all = getAllVariables();
-    var d = _.get(all, 'stat_data', {});
+function populate(){
+  var d = getStatData();
 
-    $('#gf-date').text(
-      _.get(d, '系统变量.日期', '') + '　' + _.get(d, '系统变量.时间段', '')
-    );
+  setText('gf-time', _.get(d, '当前时间', '') || '午后');
+  setText('gf-date', _.get(d, '当前年月', '') || '南宋绍兴十七年二月');
+  setText('gf-weather', _.get(d, '天气', '') || '细雨');
 
-    $('#gf-bz-loc').text('◆ ' + _.get(d, '白素贞.当前位置', ''));
-    dots('gf-bz-dots', 'gf-bz-num', _.get(d, '白素贞.好感度', 0));
-    $('#gf-bz-appear').text(_.get(d, '白素贞.外貌', ''));
-    renderClothes(d, '白素贞', 'gf-bz-clothes');
-    $('#gf-bz-pose').text(_.get(d, '白素贞.姿势', ''));
-    $('#gf-bz-mind').text(_.get(d, '白素贞.心理', ''));
+  setText('gf-bz-loc', '◆ ' + (_.get(d, '白素贞.当前位置', '') || '西湖断桥'));
+  dots('gf-bz-dots', 'gf-bz-num', _.get(d, '白素贞.好感度', 0));
+  setText('gf-bz-appear', _.get(d, '白素贞.外貌', ''));
+  renderClothes(d, '白素贞', 'gf-bz-clothes');
+  setText('gf-bz-pose', _.get(d, '白素贞.姿势', ''));
+  setText('gf-bz-mind', _.get(d, '白素贞.心理', ''));
 
-    $('#gf-xq-loc').text('◆ ' + _.get(d, '小青.当前位置', ''));
-    dots('gf-xq-dots', 'gf-xq-num', _.get(d, '小青.好感度', 0));
-    $('#gf-xq-appear').text(_.get(d, '小青.外貌', ''));
-    renderClothes(d, '小青', 'gf-xq-clothes');
-    $('#gf-xq-pose').text(_.get(d, '小青.姿势', ''));
-    $('#gf-xq-mind').text(_.get(d, '小青.心理', ''));
-  } catch(e) {
-    /* MVU 未就绪或变量缺失：保留 HTML 默认值（即 initvar 初始内容） */
-  }
+  setText('gf-xq-loc', '◆ ' + (_.get(d, '小青.当前位置', '') || '西湖断桥'));
+  dots('gf-xq-dots', 'gf-xq-num', _.get(d, '小青.好感度', 0));
+  setText('gf-xq-appear', _.get(d, '小青.外貌', ''));
+  renderClothes(d, '小青', 'gf-xq-clothes');
+  setText('gf-xq-pose', _.get(d, '小青.姿势', ''));
+  setText('gf-xq-mind', _.get(d, '小青.心理', ''));
 }
 
-/* 初始化：先等 MVU 就绪，再渲染，再订阅变量更新事件 */
 async function init(){
   await waitGlobalInitialized('Mvu');
-  render();
+  populate();
   eventOn(Mvu.events.VARIABLE_UPDATE_ENDED, function(){
-    render();
+    populate();
   });
 }
 
