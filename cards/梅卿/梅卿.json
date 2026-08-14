@@ -440,7 +440,7 @@
           "id": 13,
           "keys": [],
           "secondary_keys": [],
-          "comment": "[mvu_plot]变量列表",
+          "comment": "变量列表",
           "content": "---\n<status_current_variable>\n{{format_message_variable::stat_data}}\n</status_current_variable>",
           "constant": true,
           "selective": true,
