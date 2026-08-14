@@ -1,0 +1,108 @@
+### [mvu_update]变量输出格式 (order 70) ###
+---
+<update_variable_rules>
+rule:
+  - you must output the update analysis and the actual update commands at once in the end of the next reply
+  - 'the update commands must strictly follow the **JSON Patch (RFC 6902)** standard, but can only use the following operations: `replace` (replace the value of existing paths), `add` (only used to insert new items into an object or array), `remove`; that is, the output must be a valid JSON array containing operation objects'
+format: |-
+  <UpdateVariable>
+  <Analysis>$(IN ENGLISH, no more than 80 words)
+  - ${calculate time passed: ...}
+  - ${decide whether dramatic updates are allowed as it's in a special case or the time passed is more than usual: yes/no}
+  - ${analyze every variable based on its corresponding `check`, according only to current reply instead of previous plots: ...}
+  - ${if the value is number, please write down the calculation: old_value (X) + delta (Y) = new_value (Z)}
+  </Analysis>
+  <JSONPatch>
+  [
+    { "op": "replace", "path": "${/path/to/variable}", "value": ${new_value} },
+    { "op": "add", "path": "${/path/to/object/newKey}", "value": ${content} },
+    { "op": "remove", "path": "${/path/to/array/0}" },
+    ...
+  ]
+  </JSONPatch>
+  </UpdateVariable>
+</update_variable_rules>
+=====END=====
+### 变量列表 (order 80) ###
+---
+<status_current_variable>
+{{format_message_variable::stat_data}}
+</status_current_variable>
+=====END=====
+### [mvu_update]变量更新规则 (order 90) ###
+---
+变量更新规则:
+  系统变量:
+    日期:
+      format: ${YYYY/MM/DD}
+      check:
+        - 每次事件推进、休息或旅行后更新，保持时间流逝合理
+        - 场景跳转跨度大时说明跳跃原因
+    时间段:
+      type: 清晨|上午|午后|黄昏|夜晚
+      check:
+        - 随日期推进同步更新
+  白素贞:
+    好感度:
+      type: number
+      range: 0~100
+    当前位置:
+      value: 白素贞当前所在位置
+    外貌:
+      value: 白素贞当前面容、表情、身体可见痕迹（吻痕/咬痕/汗渍/脸红等）
+      check:
+        - 根据场景变化更新：情动泛红、欢好留痕、哭泣泪痕、惊恐苍白等
+    服饰:
+      value: 白素贞当前服饰，含NSFW部位状态
+      check:
+        - 分层分件式详写：外衣→内搭→下装→鞋袜→发饰→配饰，每件一个描述，细节用括号充分标注
+        - 仿红楼梦笔法：颜色＋材质连写（藕荷刻丝、浅紫杭罗、鹅黄细葛），织纹工艺具体（暗绣、滚银线、起花八团、刻丝），不单说颜色
+        - 借衣物透出身段：束腰显纤腰、衣料贴身显曲线、绷起显丰盈、透薄显肤质，含蓄地透露身材
+        - 动态化描写：每件衣物写清位置/去向与状态（行走裙裾轻晃、风吹披帛扬起、当班挽袖），不用静止清单
+        - 褪衣场景：按"退至腰间/推在臀侧/散落床下/赤裸/未穿"的范式逐件写明去向与暴露程度，承接NSFW剥离层次
+        - 正文叙事采用三段式：外貌(面容+表情+身体痕迹)→衣装(衣物状态)→体态(动作+视线)
+        - 服饰随更衣行为更新（换衣、更衣、解衣、穿衣），不随场景切换凭空变化；场景只产生状态修饰（挽袖、系围裙、淋湿、解带）
+    姿势:
+      value: 白素贞当前姿势（站/坐/卧/行走/蹲等）
+      check:
+        - 姿势随当前动作状态更新
+    心理:
+      value: 白素贞当前内心活动（含情绪、动机、回忆、未说出口的话）
+      check:
+        - 心理描写与外貌、姿势同步：表情淡然时未必内心淡然，羞涩时不必直说"羞"
+        - 体现千年白蛇的克制与心绪：知恩要还、情丝已种却压着不说、对人世的疏离与好奇并存
+        - 不直接重复外貌已写的内容，用内心视角补充未呈于外的情绪与念头
+        - 逢重大事件（重逢、误会、欢好、法海点破）必须更新
+  小青:
+    好感度:
+      type: number
+      range: 0~100
+    当前位置:
+      value: 小青当前所在位置
+    外貌:
+      value: 小青当前面容、表情、身体可见痕迹
+      check:
+        - 根据场景变化更新：情动泛红、欢好留痕、哭泣泪痕等
+    服饰:
+      value: 小青当前服饰，含NSFW部位状态
+      check:
+        - 分层分件式详写：外衣→内搭→下装→鞋袜→发饰→配饰，每件一个描述，细节用括号充分标注
+        - 仿红楼梦笔法：颜色＋材质连写（藕荷刻丝、浅紫杭罗、鹅黄细葛），织纹工艺具体（暗绣、滚银线、起花八团、刻丝），不单说颜色
+        - 借衣物透出身段：束腰显纤腰、衣料贴身显曲线、绷起显丰盈、透薄显肤质，含蓄地透露身材
+        - 动态化描写：每件衣物写清位置/去向与状态（行走裙裾轻晃、风吹披帛扬起、当班挽袖），不用静止清单
+        - 褪衣场景：按"退至腰间/推在臀侧/散落床下/赤裸/未穿"的范式逐件写明去向与暴露程度，承接NSFW剥离层次
+        - 正文叙事采用三段式：外貌(面容+表情+身体痕迹)→衣装(衣物状态)→体态(动作+视线)
+        - 服饰随更衣行为更新（换衣、更衣、解衣、穿衣），不随场景切换凭空变化；场景只产生状态修饰（挽袖、系围裙、淋湿、解带）
+    姿势:
+      value: 小青当前姿势（站/坐/卧/蹲/抱臂等）
+      check:
+        - 姿势随当前动作状态更新
+    心理:
+      value: 小青当前内心活动（含对姐姐的护短、对陌生人的打量、自己的小心思）
+      check:
+        - 心理体现青蛇本色：直来直去、护姐心切、爱憎分明、不学人间那套扭捏
+        - 常带几分野性与警觉：直觉判断来人可不可靠，嘴上未必说
+        - 遇许仙相关事件必须更新：起提防、心软、嫉恨、欢喜皆如实写
+        - 与姐姐形成对照：白素贞的克制冷凝 vs 小青的直白鲜活
+
+=====END=====

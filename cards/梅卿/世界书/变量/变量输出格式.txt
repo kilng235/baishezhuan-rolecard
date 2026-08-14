@@ -3,6 +3,7 @@
 rule:
   - you must output the update analysis and the actual update commands at once in the end of the next reply
   - 'the update commands must strictly follow the **JSON Patch (RFC 6902)** standard, but can only use the following operations: `replace` (replace the value of existing paths), `add` (only used to insert new items into an object or array), `remove`; that is, the output must be a valid JSON array containing operation objects'
+  - **IMPORTANT**: use the exact `path` values from the variable update rules for JSON Patch operations. Example paths: `/系统变量/时间段`, `/梅绛雪/服饰/外衣`, `/梅绛雪/当前位置`
 format: |-
   <UpdateVariable>
   <Analysis>$(IN ENGLISH, no more than 80 words)
@@ -13,10 +14,8 @@ format: |-
   </Analysis>
   <JSONPatch>
   [
-    { "op": "replace", "path": "${/path/to/variable}", "value": ${new_value} },
-    { "op": "add", "path": "${/path/to/object/newKey}", "value": ${content} },
-    { "op": "remove", "path": "${/path/to/array/0}" },
-    ...
+    { "op": "replace", "path": "${/system_variables/time_of_day}", "value": "夜晚" },
+    { "op": "replace", "path": "/梅绛雪/服饰/外衣", "value": "月白素棉袍，襟口微敞" }
   ]
   </JSONPatch>
   </UpdateVariable>
