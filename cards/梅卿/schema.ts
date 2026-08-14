@@ -6,7 +6,6 @@ export const Schema = z.object({
   }).prefault({}),
   梅绛雪: z.object({
     当前位置: z.string().prefault('梅园小筑'),
-    好感度: z.coerce.number().transform(v => _.clamp(v, 0, 100)).prefault(65),
     外貌: z.string().prefault('眉目间一点清冷孤意，眼若寒潭映雪，泛着浅浅的幽光。雪肤被寒梅映得愈发清透，唇色淡如霜染。青丝半散，鬓边一截梅枝斜插，枝头一点未谢的红梅微微颤动，仿佛随时会化作人语'),
     服饰: z.object({
       外衣: z.string().prefault('月白素锦披风,领口滚一圈细密的白狐毛,寒风里微微翻卷。衣襟敞开一角,露出里面素色的衫'),

@@ -132,49 +132,6 @@
     margin-left: 8px;
   }
 
-  /* ===== 好感度指示器 ===== */
-  .gf-aff {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin: 6px 0 10px;
-    font-size: 14px;
-    color: #8b7355;
-  }
-  .gf-aff-label { color: var(--cinnabar); font-size: 15px; margin-right: 4px; }
-
-  .gf-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-    border: 1px solid #ccc;
-    transition: all .4s ease;
-    background: #ddd;
-    flex-shrink: 0;
-  }
-  .gf-dot.filled { border-color: currentColor; }
-  .gf-dot.half {
-    border-color: currentColor;
-    background: linear-gradient(90deg, currentColor 50%, #ddd 50%);
-  }
-
-  /* 好感度颜色：低→青碧，中→金黄，高→朱红 */
-  .gf-dot.level-low.filled  { background: var(--jade);  color: var(--jade);  }
-  .gf-dot.level-low.half    { color: var(--jade);  }
-  .gf-dot.level-mid.filled  { background: var(--ochre); color: var(--ochre); }
-  .gf-dot.level-mid.half    { color: var(--ochre); }
-  .gf-dot.level-high.filled { background: var(--cinnabar); color: var(--cinnabar); }
-  .gf-dot.level-high.half   { color: var(--cinnabar); }
-
-  /* 好感度数字 */
-  .gf-aff-num {
-    margin-left: 8px;
-    font-family: monospace;
-    font-size: 13px;
-    color: #aaa;
-  }
-
   /* ===== 信息区块 ===== */
   .gf-sec {
     margin: 8px 0;
@@ -282,11 +239,6 @@
       梅绛雪
       <span class="gf-loc" id="gf-ym-loc">◆ 梅园小筑</span>
     </div>
-    <div class="gf-aff" role="status" aria-label="好感度">
-      <span class="gf-aff-label">心意</span>
-      <span id="gf-ym-dots" role="img" aria-hidden="true"></span>
-      <span class="gf-aff-num" id="gf-ym-num">65 / 100</span>
-    </div>
     <div class="gf-sec">
       <div class="gf-sec-title">外貌</div>
       <div class="gf-sec-body" id="gf-ym-appear">眉目间一点清冷孤意，眼若寒潭映雪，泛着浅浅的幽光。雪肤被寒梅映得愈发清透，唇色淡如霜染。青丝半散，鬓边一截梅枝斜插，枝头一点未谢的红梅微微颤动，仿佛随时会化作人语</div>
@@ -317,33 +269,6 @@
 </div>
 
 <script type="module">
-/* 好感度圆点渲染（含色彩渐变）
-   颜色规则：低→青碧(jade)，中→金黄(ochre)，高→朱红(cinnabar) */
-function dots(containerId, numId, val){
-  var n = Math.max(0, Math.min(100, parseInt(val) || 0));
-  var f = Math.floor(n / 10);
-  var h = (n % 10) >= 5;
-  var s = '';
-
-  for (var i = 0; i < 10; i++) {
-    var level;
-    if (i < 3)       level = 'level-low';   // 0-29  青碧
-    else if (i < 7)  level = 'level-mid';   // 30-69 金黄
-    else             level = 'level-high';  // 70-100 朱红
-
-    var cls = 'gf-dot ' + level;
-    if (i < f)            cls += ' filled';
-    else if (i === f && h) cls += ' half';
-
-    s += '<span class="' + cls + '"></span>';
-  }
-
-  var el = document.getElementById(containerId);
-  var numEl = document.getElementById(numId);
-  if (el) el.innerHTML = s;
-  if (numEl) numEl.textContent = n + ' / 100';
-}
-
 /* 渲染服饰分行：从 stat_data 读取 7 个子键，生成分行 HTML */
 function renderClothes(d, prefix, containerId){
   var keys = ['外衣','内搭','贴身层','下装','鞋袜','发饰','配饰'];
@@ -375,7 +300,6 @@ function render(){
 
     // 梅绛雪主体
     $('#gf-ym-loc').text('◆ ' + _.get(d, '梅绛雪.当前位置', ''));
-    dots('gf-ym-dots', 'gf-ym-num', _.get(d, '梅绛雪.好感度', 0));
     $('#gf-ym-appear').text(_.get(d, '梅绛雪.外貌', ''));
     renderClothes(d, '梅绛雪', 'gf-ym-clothes');
     $('#gf-ym-pose').text(_.get(d, '梅绛雪.姿势', ''));
