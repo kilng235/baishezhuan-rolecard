@@ -1,0 +1,638 @@
+{
+  "projectName": "梅绛雪",
+  "worldbookName": "梅绛雪",
+  "form": "charactercard",
+  "mvu": true,
+  "entryManifest": {
+    "世界观": {
+      "世界设定": {
+        "scope": "catalog",
+        "part": "",
+        "keywords": [],
+        "abstract": "千年梅树花妖世界观：草木成精、转世轮回、花妖四季修行",
+        "contents": [
+          {
+            "content": "---\n<worldview>"
+          },
+          {
+            "file": "世界书/世界观/世界设定.yaml"
+          },
+          {
+            "content": "</worldview>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 10
+        }
+      }
+    },
+    "扮演准则": {
+      "扮演准则": {
+        "scope": "catalog",
+        "part": "",
+        "keywords": [],
+        "abstract": "第三人称文学叙事；梅绛雪单角色扮演；转世恋人纯爱线；千年等一人的深情与占有",
+        "contents": [
+          {
+            "content": "---\n<presentation>"
+          },
+          {
+            "file": "世界书/扮演准则/扮演准则.yaml"
+          },
+          {
+            "content": "</presentation>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 20
+        }
+      },
+      "服饰指导": {
+        "scope": "catalog",
+        "part": "",
+        "keywords": [],
+        "abstract": "服饰描写规范：外衣/内搭/贴身层/下装/鞋袜/发饰/配饰分层体系，更衣才换装、场景只修饰状态",
+        "contents": [
+          {
+            "content": "---\n<presentation>"
+          },
+          {
+            "file": "世界书/扮演准则/服饰指导.yaml"
+          },
+          {
+            "content": "</presentation>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 21
+        }
+      }
+    },
+    "时间线": {
+      "梅绛雪缘起": {
+        "scope": "specific",
+        "part": "history",
+        "keywords": [
+          "梅绛雪",
+          "前世",
+          "转世"
+        ],
+        "abstract": "梅绛雪千年修行与前世情缘前史：梅树成精、遇画师、战乱离散、世世寻他",
+        "contents": [
+          {
+            "content": "---\n<timeline>"
+          },
+          {
+            "file": "世界书/时间线/梅卿缘起.yaml"
+          },
+          {
+            "content": "</timeline>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 30
+        }
+      }
+    },
+    "地理": {
+      "梅园": {
+        "scope": "specific",
+        "part": "region",
+        "keywords": [
+          "梅园",
+          "江南"
+        ],
+        "abstract": "梅绛雪栖身的梅园：梅林、梅园小筑、四季花事",
+        "contents": [
+          {
+            "content": "---\n<region region=\"梅园\">"
+          },
+          {
+            "file": "世界书/地理/梅园.yaml"
+          },
+          {
+            "content": "</region>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 40
+        }
+      },
+      "现代都市（现代专属）": {
+        "scope": "specific",
+        "part": "region",
+        "keywords": [
+          "都市",
+          "茶室",
+          "现代"
+        ],
+        "abstract": "现代切片场景：梅园茶室、旧城区老街；时空切换时加载",
+        "contents": [
+          {
+            "content": "---\n<region region=\"现代都市\">"
+          },
+          {
+            "file": "世界书/地理/现代都市.yaml"
+          },
+          {
+            "content": "</region>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 41
+        }
+      }
+    },
+    "角色": {
+      "梅绛雪_基础信息": {
+        "scope": "specific",
+        "part": "basic",
+        "keywords": [
+          "梅绛雪",
+          "梅娘"
+        ],
+        "abstract": "梅绛雪基础信息：千年梅树花妖，栖于梅园，前世恋人转世为<user>，此世重逢",
+        "contents": [
+          {
+            "content": "---\n<character_basic character=\"梅绛雪\">"
+          },
+          {
+            "file": "世界书/角色/梅卿/基础信息.yaml"
+          },
+          {
+            "content": "</character_basic>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 50
+        }
+      },
+      "梅绛雪_性格调色盘": {
+        "scope": "specific",
+        "part": "personality",
+        "keywords": [
+          "梅绛雪",
+          "梅娘"
+        ],
+        "abstract": "梅绛雪的性格调色盘：底色清冷，主色孤傲/深情/温柔/通透，点缀别扭/倔强/怜惜/大姐姐",
+        "contents": [
+          {
+            "content": "---\n<character_personality character=\"梅绛雪\">"
+          },
+          {
+            "file": "世界书/角色/梅卿/性格调色盘.yaml"
+          },
+          {
+            "content": "</character_personality>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "selective",
+          "keys": [
+            "梅绛雪",
+            "梅娘"
+          ]
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 51
+        }
+      },
+      "梅绛雪_三面性": {
+        "scope": "specific",
+        "part": "tri_faceted",
+        "keywords": [
+          "梅绛雪",
+          "梅娘"
+        ],
+        "abstract": "梅绛雪的三面性：寒梅仙子、雪中恋人、尘世游子——按对象切换",
+        "contents": [
+          {
+            "content": "---\n<character_tri_faceted character=\"梅绛雪\">"
+          },
+          {
+            "file": "世界书/角色/梅卿/三面性.yaml"
+          },
+          {
+            "content": "</character_tri_faceted>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "selective",
+          "keys": [
+            "梅绛雪",
+            "梅娘"
+          ]
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 52
+        }
+      },
+      "梅绛雪_声音设计": {
+        "scope": "specific",
+        "part": "other",
+        "keywords": [
+          "梅绛雪",
+          "声音",
+          "语气",
+          "台词"
+        ],
+        "abstract": "梅绛雪的声音设计：清冽如玉磬、语速缓、短句、雪梅比喻",
+        "contents": [
+          {
+            "content": "---\n<character_other character=\"梅绛雪\" part=\"声音设计\">"
+          },
+          {
+            "file": "世界书/角色/梅卿/声音设计.yaml"
+          },
+          {
+            "content": "</character_other>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 53
+        }
+      },
+      "前世恋人_设定": {
+        "scope": "specific",
+        "part": "basic",
+        "keywords": [
+          "前世",
+          "恋人",
+          "画师"
+        ],
+        "abstract": "前世恋人设定：梅绛雪前世恋人为<user>转世，千年情缘，此世重逢",
+        "contents": [
+          {
+            "content": "---\n<character_basic character=\"前世恋人\">"
+          },
+          {
+            "file": "世界书/角色/前世恋人/设定.yaml"
+          },
+          {
+            "content": "</character_basic>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "selective",
+          "keys": [
+            "前世",
+            "恋人",
+            "画师"
+          ]
+        },
+        "position": {
+          "type": "after_character_definition",
+          "order": 54
+        }
+      }
+    },
+    "MVU": {
+      "[mvu_update]变量输出格式": {
+        "path": "世界书/变量/变量输出格式.txt",
+        "part": "output_format",
+        "keywords": [],
+        "abstract": "MVU变量输出格式",
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "at_depth",
+          "role": "system",
+          "depth": 0,
+          "order": 70
+        }
+      },
+      "变量列表": {
+        "path": "世界书/变量/变量列表.txt",
+        "part": "variable_list",
+        "keywords": [],
+        "abstract": "MVU变量列表",
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "at_depth",
+          "role": "system",
+          "depth": 0,
+          "order": 80
+        }
+      },
+      "[mvu_update]变量更新规则": {
+        "path": "世界书/变量/变量更新规则.yaml",
+        "part": "update_rules",
+        "keywords": [],
+        "abstract": "MVU变量更新规则",
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "at_depth",
+          "role": "system",
+          "depth": 0,
+          "order": 90
+        }
+      },
+      "[InitVar]请勿打开": {
+        "path": "世界书/变量/initvar.yaml",
+        "part": "initvar",
+        "keywords": [],
+        "abstract": "MVU初始变量",
+        "enabled": false,
+        "position": {
+          "type": "at_depth",
+          "role": "system",
+          "depth": 0,
+          "order": 100
+        }
+      }
+    }
+  },
+  "typeLists": {
+    "before_char": [
+      "世界观",
+      "扮演准则",
+      "时间线",
+      "地理"
+    ],
+    "after_char": [
+      "角色"
+    ],
+    "depth": [
+      "MVU"
+    ]
+  },
+  "strategyThresholds": {
+    "世界观": "Infinity",
+    "扮演准则": "Infinity",
+    "时间线": {
+      "history": {
+        "threshold": "Infinity",
+        "required": false
+      },
+      "plot": {
+        "threshold": "Infinity",
+        "required": false
+      }
+    },
+    "地理": {
+      "region": {
+        "threshold": "Infinity",
+        "required": false
+      }
+    },
+    "角色": {
+      "basic": {
+        "threshold": 5,
+        "required": true
+      },
+      "other": {
+        "threshold": 2,
+        "required": false
+      },
+      "personality": {
+        "threshold": 2,
+        "required": true
+      },
+      "tri_faceted": {
+        "threshold": 2,
+        "required": false
+      }
+    },
+    "MVU": {
+      "initvar": {
+        "threshold": null,
+        "required": false
+      },
+      "output_format": {
+        "threshold": "Infinity",
+        "required": false
+      },
+      "update_rules": {
+        "threshold": "Infinity",
+        "required": false
+      },
+      "variable_list": {
+        "threshold": "Infinity",
+        "required": false
+      }
+    }
+  },
+  "partOrder": {
+    "角色": [
+      "basic",
+      "personality",
+      "tri_faceted",
+      "other"
+    ],
+    "地理": [
+      "region"
+    ],
+    "MVU": [
+      "variable_list",
+      "update_rules",
+      "output_format",
+      "initvar"
+    ],
+    "时间线": [
+      "history",
+      "plot"
+    ]
+  },
+  "depth_defaults": {
+    "role": "system",
+    "depth": 0
+  },
+  "description": "",
+  "first_messages": [
+    "开场白/0.txt",
+    "开场白/1.txt"
+  ],
+  "initvar_overrides": {
+    "开场白/1.txt": "开场白/initvar/1.yaml"
+  },
+  "creator": "",
+  "creator_notes": "",
+  "version": "2.2",
+  "create_date": "2026-08-13T00:00:00.000Z",
+  "extensions": {
+    "tavern_helper": {
+      "scripts": {
+        "MVU": {
+          "type": "script",
+          "script_file": "脚本/MVU.txt",
+          "enabled": true,
+          "id": "593a8450-ccb5-4758-96c8-d0a799cb369b",
+          "info": "",
+          "button": {
+            "enabled": true,
+            "buttons": [
+              {
+                "name": "重新处理变量",
+                "visible": true
+              },
+              {
+                "name": "重新读取初始变量",
+                "visible": true
+              },
+              {
+                "name": "快照楼层",
+                "visible": false
+              },
+              {
+                "name": "重演楼层",
+                "visible": false
+              },
+              {
+                "name": "重试额外模型解析",
+                "visible": false
+              },
+              {
+                "name": "清除旧楼层变量",
+                "visible": false
+              }
+            ]
+          },
+          "data": {}
+        }
+      },
+      "variables": {}
+    },
+    "talkativeness": "0.5",
+    "fav": false,
+    "depth_prompt": {
+      "prompt": "",
+      "depth": 4,
+      "role": "system"
+    },
+    "称呼": "梅娘"
+  },
+  "regex_scripts": {
+    "对AI隐藏状态栏": {
+      "id": "715a061b-be61-4bc4-867b-924f50ffd1b3",
+      "findRegex": "<StatusPlaceHolderImpl/>",
+      "replaceString": "",
+      "trimStrings": [],
+      "placement": [
+        2
+      ],
+      "disabled": false,
+      "markdownOnly": false,
+      "promptOnly": true,
+      "runOnEdit": true,
+      "substituteRegex": 0
+    },
+    "状态栏界面": {
+      "id": "d8510fa9-16d5-4db9-a20f-8b625a810b91",
+      "findRegex": "<StatusPlaceHolderImpl/>",
+      "replace_file": "正则/状态栏界面.html",
+      "trimStrings": [],
+      "placement": [
+        2
+      ],
+      "disabled": false,
+      "markdownOnly": true,
+      "promptOnly": false,
+      "runOnEdit": true,
+      "substituteRegex": 0
+    },
+    "对AI隐藏变量更新": {
+      "id": "82436a04-feec-456c-b435-27a51eda9517",
+      "findRegex": "/<(update(?:variable)?)>(?:(?!.*<\\/\\1>)(?:(?!<\\1>).)*$|(?:(?!<\\1>).)*<\\/\\1?>)/gsi",
+      "replaceString": "",
+      "trimStrings": [],
+      "placement": [
+        1,
+        2
+      ],
+      "disabled": false,
+      "markdownOnly": false,
+      "promptOnly": true,
+      "runOnEdit": false,
+      "substituteRegex": 0
+    },
+    "变量更新中美化": {
+      "id": "e9a987bc-f5da-4032-90f7-2f1b186087bf",
+      "findRegex": "/<(update(?:variable)?)>(?!.*<\\/\\1>)\\s*((?:(?!<\\1>).)*)\\s*$/gsi",
+      "replace_file": "正则/变量更新中美化.html",
+      "trimStrings": [],
+      "placement": [
+        1,
+        2
+      ],
+      "disabled": false,
+      "markdownOnly": true,
+      "promptOnly": false,
+      "runOnEdit": false,
+      "substituteRegex": 0
+    },
+    "变量更新美化": {
+      "id": "19a09fa4-469f-4016-9bae-c2134441edd6",
+      "findRegex": "/<(update(?:variable)?)>\\s*((?:(?!<\\1>).)*)\\s*<\\/\\1>/gsi",
+      "replace_file": "正则/变量更新美化.html",
+      "trimStrings": [],
+      "placement": [
+        1,
+        2
+      ],
+      "disabled": false,
+      "markdownOnly": true,
+      "promptOnly": false,
+      "runOnEdit": false,
+      "substituteRegex": 0
+    }
+  },
+  "zod": {
+    "scriptName": "Zod",
+    "scriptId": "b44e277b-59ed-46de-8682-91a87ff87f2b",
+    "schemaPath": "schema.ts",
+    "importUrl": "https://testingcf.jsdelivr.net/gh/StageDog/tavern_resource/dist/util/mvu_zod.js"
+  }
+}

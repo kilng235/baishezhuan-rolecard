@@ -3,6 +3,10 @@
         "白蛇传": {
             "state_file": "cards/白蛇传/tavern-cards-state.json",
             "artifact": "cards/白蛇传/白蛇传.json"
+        },
+        "梅卿": {
+            "state_file": "cards/梅卿/tavern-cards-state.json",
+            "artifact": "cards/梅卿/梅卿.json"
         }
     },
     "default_part_order": {
