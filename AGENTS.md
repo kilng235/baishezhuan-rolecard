@@ -17,6 +17,12 @@
 - 新建文件时，遵循项目的目录结构约定；无明确约定时按内容合理组织。
 - 重要产出（角色卡 JSON、PNG 卡、世界书等）保留在项目内便于追溯版本。
 
+## 知识库（外部参考，只读）
+创作时可查阅以下知识库，均位于项目目录之外，**仅作参考、禁止写入**：
+- `E:\笔记\写卡\STDB` — ST 开发指南数据库（通用 SillyTavern 开发参考，A0–E5 系列：A2 角色卡格式规范 / A3 世界书优化 / A5 渲染管线与宏 / A6 正则机制 / B1 变量更新规则 / C 系列状态栏与前端 / D 系列性能部署与安全 / E 系列扩展生态）
+- `E:\笔记\写卡\写卡经验` — 角色卡拆解与经验总结（card_disassembly / APP_12_disassembly / 状态栏脚本开发报告等）
+- `E:\笔记\写卡\参考` — 参考资源库（manifest.json 组件目录：character-info / extensions / helper-scripts / regex-scripts / worldbook / sandbox）
+
 ## 项目结构
 
 ```
