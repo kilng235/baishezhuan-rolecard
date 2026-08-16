@@ -1,280 +1,446 @@
+```html
 <!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>白蛇传 · 古风状态栏</title>
+<title>白蛇传 · 水墨状态栏</title>
 <style>
 
+  /* ========== 语义化 token（水墨写意） ========== */
   .gufeng-bar {
-    --ink:       #1a1a1a;
-    --cinnabar:  #b83232;
-    --ochre:     #a08030;
-    --jade:      #2a7a5a;
-    --bd:        #c8b898;
-    --bg:        rgba(255,255,255,.35);
-    --paper:     #f6f1e8;
+    /* 宣纸日间 */
+    --paper:       #f6efe0;
+    --paper-deep:  #efe6d2;
+    --ink:         #22201c;
+    --ink-soft:    #57503f;
+    --ink-faint:   #9a8f7a;
+    --line:        rgba(34, 32, 28, .20);
+    --line-strong: rgba(34, 32, 28, .38);
+    --wash:        rgba(34, 32, 28, .05);
+    --wash-strong: rgba(34, 32, 28, .09);
+    --cinnabar:    #a3382a;   /* 朱砂 */
+    --jade:        #336b55;   /* 黛青 */
+    --ochre:       #a07d33;   /* 赭金 */
+    --seal-bg:     #a3382a;
+    --seal-fg:     #f6efe0;
 
-    font-family: "楷体","KaiTi","STKaiti",serif;
+    font-family: "楷体", "KaiTi", "STKaiti", "Kaiti SC", "宋体", "SimSun", serif;
+    width: 100%;
     max-width: 640px;
-    margin: 16px auto;
+    margin: 12px auto;
     background: var(--paper);
-    border: 1px solid var(--bd);
-    border-radius: 4px;
-    box-shadow: 0 2px 12px rgba(0,0,0,.07);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    box-shadow: 0 3px 16px rgba(34, 32, 28, .12);
     padding: 0;
     overflow: hidden;
     color: var(--ink);
-    font-size: 15px;
-    line-height: 1.9;
+    font-size: 14px;
+    line-height: 1.85;
     position: relative;
 
+    /* 四角淡墨晕染 */
     background-image:
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(180,160,130,.03) 2px,
-        rgba(180,160,130,.03) 4px
-      ),
-      radial-gradient(ellipse at 20% 50%, rgba(180,160,130,.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(180,160,130,.06) 0%, transparent 50%);
+      radial-gradient(ellipse at 12% 8%, var(--wash-strong) 0%, transparent 45%),
+      radial-gradient(ellipse at 92% 90%, var(--wash-strong) 0%, transparent 45%);
   }
 
-  .gufeng-bar::before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    width: 120px;
-    height: 120px;
-    background: radial-gradient(circle at 40% 40%,
-      rgba(100,80,60,.06) 0%,
-      rgba(100,80,60,.04) 30%,
-      transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .gufeng-bar::after {
-    content: "";
-    position: absolute;
-    bottom: -30px;
-    left: -30px;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle at 60% 60%,
-      rgba(100,80,60,.05) 0%,
-      rgba(100,80,60,.03) 40%,
-      transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
+  .gufeng-bar, .gufeng-bar * { box-sizing: border-box; }
+  .gufeng-bar svg { display: block; max-width: 100%; }
   .gufeng-bar > * { position: relative; z-index: 1; }
 
-  .gf-header {
-    padding: 12px 24px;
-    border-bottom: 1px solid var(--bd);
-    background: rgba(248,242,228,.5);
+  /* ========== 顶部远山（水墨剪影） ========== */
+  .mo-hills {
+    width: 100%;
+    height: 40px;
+    margin: 0;
   }
-  .gf-header-row1 {
+  .mo-hills .mo-hill { fill: var(--wash-strong); }
+  .mo-hills .mo-hill-a { fill: var(--wash-strong); }
+  .mo-hills .mo-hill-b { fill: var(--wash); }
+
+  /* ========== 头部 ========== */
+  .gf-header {
+    padding: 2px 18px 10px;
+    position: relative;
+  }
+  .mo-title-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    font-size: 15px;
-    color: #8b7355;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 2px;
   }
   .gf-header .gf-title {
-    font-size: 17px;
+    font-size: 23px;
     font-weight: bold;
-    color: #12284a;
-    letter-spacing: 3px;
+    color: var(--ink);
+    letter-spacing: 8px;
+    text-indent: 8px; /* 抵消末字字距，保持居中 */
+  }
+  /* 朱砂印章 */
+  .mo-seal {
+    width: 23px;
+    height: 23px;
+    flex-shrink: 0;
+    background: var(--seal-bg);
+    color: var(--seal-fg);
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 23px;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .18);
+    letter-spacing: 0;
+  }
+
+  /* 水墨笔触分隔线 */
+  .mo-brush {
+    height: 2px;
+    margin: 8px 0 0;
+    background: linear-gradient(90deg, transparent, var(--ink-faint) 18%, var(--ink-faint) 82%, transparent);
+    opacity: .45;
+    border-radius: 2px;
   }
 
   .gf-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 14px;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px dashed rgba(139,115,85,.3);
-    font-size: 13px;
-    color: #8b7355;
+    justify-content: center;
+    gap: 5px 16px;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--ink-soft);
   }
-  .gf-meta-item { display: inline-flex; align-items: center; gap: 4px; }
-  .gf-meta-item .gf-meta-label {
+  .gf-meta-item { display: inline-flex; align-items: center; gap: 5px; }
+  .gf-meta-item .gf-meta-label { color: var(--cinnabar); font-weight: bold; letter-spacing: 1px; }
+  .gf-meta-item .gf-meta-label::after { content: "·"; margin-left: 5px; color: var(--ink-faint); }
+
+  /* ========== 角色区块（tab 切换单面板） ========== */
+  .gf-chars {
+    display: block;
+    padding: 0 16px;
+  }
+
+  /* tab 栏 */
+  .gf-tabs {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--line-strong);
+  }
+  .gf-tab {
+    font-family: inherit;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--ink-soft);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    padding: 4px 14px 6px;
+    cursor: pointer;
+    border-radius: 2px 2px 0 0;
+    transition: color .2s ease, background .2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .gf-tab:hover { background: var(--wash); color: var(--ink); }
+  .gf-tab.active {
     color: var(--cinnabar);
     font-weight: bold;
-    letter-spacing: 1px;
-  }
-  .gf-meta-item .gf-meta-label::after { content: "："; }
-  .gf-meta-item .gf-meta-value {
-    color: var(--ink);
-    font-family: "楷体","KaiTi","STKaiti",serif;
+    border-bottom-color: var(--cinnabar);
   }
 
   .gf-char {
-    margin: 16px 24px;
-    padding: 0 0 12px;
-    border-bottom: 1px solid var(--bd);
+    display: none;
+    padding: 10px 0 12px;
+    min-width: 0;
   }
-  .gf-char:last-of-type { border-bottom: none; margin-bottom: 0; }
+  .gf-char.active { display: block; }
 
+  .mo-char-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 5px 8px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--line-strong);
+  }
   .gf-char-name {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: bold;
-    color: #12284a;
-    margin-bottom: 4px;
-    letter-spacing: 1px;
+    color: var(--ink);
+    letter-spacing: 3px;
+  }
+  .gf-char-name::after {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin: 0 4px 2px 7px;
+    background: var(--cinnabar);
+    border-radius: 50%;
   }
   .gf-char-name .gf-loc {
     font-weight: normal;
-    font-size: 14px;
-    color: #8b7355;
-    margin-left: 8px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0;
+    margin-left: 2px;
   }
+  .gf-char-name .gf-loc::before { content: "◆ "; color: var(--ink-faint); }
 
+  /* 好感度 */
   .gf-aff {
     display: flex;
     align-items: center;
     gap: 4px;
-    margin: 6px 0 10px;
-    font-size: 14px;
-    color: #8b7355;
+    margin: 8px 0 10px;
+    font-size: 13px;
+    color: var(--ink-soft);
   }
-  .gf-aff-label { color: var(--cinnabar); font-size: 15px; margin-right: 4px; }
+  .gf-aff-label { color: var(--cinnabar); font-size: 14px; margin-right: 5px; letter-spacing: 2px; }
 
   .gf-dot {
-    width: 12px;
-    height: 12px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid var(--ink-faint);
+    background: transparent;
+    color: var(--ink-faint);
     transition: all .4s ease;
-    background: #ddd;
     flex-shrink: 0;
   }
-  .gf-dot.filled { border-color: currentColor; }
+  .gf-dot.filled { border-color: currentColor; background: currentColor; }
   .gf-dot.half {
     border-color: currentColor;
-    background: linear-gradient(90deg, currentColor 50%, #ddd 50%);
+    background: linear-gradient(90deg, currentColor 50%, transparent 50%);
   }
-  .gf-dot.level-low.filled  { background: var(--jade);  color: var(--jade);  }
-  .gf-dot.level-low.half    { color: var(--jade);  }
-  .gf-dot.level-mid.filled  { background: var(--ochre); color: var(--ochre); }
-  .gf-dot.level-mid.half    { color: var(--ochre); }
-  .gf-dot.level-high.filled { background: var(--cinnabar); color: var(--cinnabar); }
-  .gf-dot.level-high.half   { color: var(--cinnabar); }
+  .gf-dot.level-low  { color: var(--jade); }
+  .gf-dot.level-mid  { color: var(--ochre); }
+  .gf-dot.level-high { color: var(--cinnabar); }
   .gf-aff-num {
     margin-left: 8px;
-    font-family: monospace;
-    font-size: 13px;
-    color: #aaa;
+    font-family: "Consolas", "Menlo", monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0;
   }
 
+  /* 信息区块 */
   .gf-sec {
     margin: 8px 0;
-    background: var(--bg);
-    border: 1px solid rgba(200,184,154,.4);
-    border-radius: 3px;
-    padding: 10px 14px;
+    background: var(--wash);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 6px 10px;
   }
   .gf-sec-title {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--cinnabar);
     font-weight: bold;
-    margin-bottom: 4px;
-    padding-left: 10px;
+    margin-bottom: 3px;
+    padding-left: 9px;
     border-left: 3px solid var(--cinnabar);
-    letter-spacing: 2px;
+    border-radius: 2px;
+    letter-spacing: 4px;
   }
   .gf-sec-body {
-    font-size: 16px;
-    line-height: 2;
+    font-size: 13px;
+    line-height: 1.85;
     color: var(--ink);
     white-space: pre-wrap;
+    overflow-wrap: anywhere;
     word-break: break-word;
-    overflow-wrap: break-word;
   }
 
+  /* 服饰折叠面板 */
+  .gf-sec.gf-clo-wrap { padding: 0; overflow: hidden; }
+  .gf-sec.gf-clo-wrap summary.gf-sec-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    margin: 0;
+    padding: 6px 10px;
+    user-select: none;
+    list-style: none;
+  }
+  .gf-sec.gf-clo-wrap summary.gf-sec-title::-webkit-details-marker { display: none; }
+  .gf-sec.gf-clo-wrap summary.gf-sec-title::after {
+    content: "▸";
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--ink-faint);
+    transition: transform .2s ease;
+  }
+  .gf-sec.gf-clo-wrap[open] summary.gf-sec-title::after { transform: rotate(90deg); }
+  .gf-sec.gf-clo-wrap summary.gf-sec-title:hover { background: var(--wash-strong); }
+  .gf-sec.gf-clo-wrap .gf-sec-body.clothes {
+    padding: 0 10px 6px;
+    border-top: 1px solid var(--line);
+  }
+
+  /* 服饰分行 */
   .gf-clo-item {
     display: flex;
     gap: 8px;
-    padding: 2px 0;
-    line-height: 1.9;
+    padding: 1px 0;
+    line-height: 1.8;
     align-items: flex-start;
   }
-  .gf-clo-item + .gf-clo-item { border-top: 1px dashed rgba(184,50,50,.15); margin-top: 2px; padding-top: 4px; }
+  .gf-clo-item + .gf-clo-item {
+    border-top: 1px dashed var(--line-strong);
+    margin-top: 1px;
+    padding-top: 3px;
+  }
   .gf-clo-label {
     flex-shrink: 0;
     min-width: 3.2em;
     color: var(--cinnabar);
     font-weight: bold;
     letter-spacing: 1px;
-    line-height: 1.9;
+    line-height: 1.8;
     padding-top: 2px;
   }
   .gf-clo-label::after { content: "："; }
   .gf-clo-desc {
     flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
     word-break: break-word;
-    overflow-wrap: break-word;
   }
 
+  /* 心理：淡墨写意 */
   .gf-sec.gf-sec-mind {
-    background: rgba(122,84,42,.06);
-    border-color: rgba(122,84,42,.25);
+    background: var(--wash-strong);
+    border-color: var(--line-strong);
     border-style: dashed;
   }
   .gf-sec.gf-sec-mind .gf-sec-title {
-    color: #6b4a2a;
-    border-left-color: #6b4a2a;
-    letter-spacing: 1px;
+    color: var(--ink-soft);
+    border-left-color: var(--ink-soft);
+    letter-spacing: 2px;
   }
   .gf-sec.gf-sec-mind .gf-sec-body {
     font-style: italic;
-    color: #3a2c1e;
+    color: var(--ink-soft);
   }
 
+  /* ========== 页脚印章 ========== */
   .gf-footer {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     padding: 10px;
-    font-size: 13px;
-    color: var(--cinnabar);
-    letter-spacing: 2px;
-    border-top: 1px solid rgba(200,184,154,.3);
-    font-style: italic;
+    border-top: 1px solid var(--line);
+  }
+  .gf-footer .mo-seal {
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+    line-height: 20px;
+  }
+  .gf-footer .mo-footer-text {
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 6px;
   }
 
-  @media (max-width: 640px) {
-    .gufeng-bar { font-size: 14px; margin: 8px auto; }
-    .gf-header { padding: 8px 12px; }
-    .gf-header-row1 { flex-wrap: wrap; gap: 4px; }
-    .gf-header .gf-title { font-size: 16px; }
-    .gf-meta { font-size: 12px; gap: 4px 10px; }
-    .gf-char { margin: 12px 12px; }
-    .gf-sec { padding: 8px 10px; }
-    .gf-sec-body { font-size: 15px; }
-    .gf-dot { width: 10px; height: 10px; }
+  /* ========== 深色模式（夜色宣纸） ========== */
+  @media (prefers-color-scheme: dark) {
+    .gufeng-bar {
+      --paper:       #232019;
+      --paper-deep:  #2a2620;
+      --ink:         #ddd3c0;
+      --ink-soft:    #b3a892;
+      --ink-faint:   #857a67;
+      --line:        rgba(221, 211, 192, .20);
+      --line-strong: rgba(221, 211, 192, .38);
+      --wash:        rgba(221, 211, 192, .06);
+      --wash-strong: rgba(221, 211, 192, .10);
+      --cinnabar:    #c9553f;
+      --jade:        #6f9a84;
+      --ochre:       #c9a64e;
+      --seal-bg:     #c9553f;
+      --seal-fg:     #232019;
+    }
+  }
+  /* 跟随 SillyTavern 深色主题 */
+  body.theme_dark .gufeng-bar,
+  body.theme-dark .gufeng-bar {
+    --paper:       #232019;
+    --paper-deep:  #2a2620;
+    --ink:         #ddd3c0;
+    --ink-soft:    #b3a892;
+    --ink-faint:   #857a67;
+    --line:        rgba(221, 211, 192, .20);
+    --line-strong: rgba(221, 211, 192, .38);
+    --wash:        rgba(221, 211, 192, .06);
+    --wash-strong: rgba(221, 211, 192, .10);
+    --cinnabar:    #c9553f;
+    --jade:        #6f9a84;
+    --ochre:       #c9a64e;
+    --seal-bg:     #c9553f;
+    --seal-fg:     #232019;
   }
 
-  @media (max-width: 400px) {
-    .gf-header .gf-title { font-size: 15px; letter-spacing: 1px; }
-    .gf-char-name { font-size: 15px; }
-    .gf-aff { flex-wrap: wrap; }
+  /* ========== 动效与可访问性 ========== */
+  @media (prefers-reduced-motion: reduce) {
+    .gufeng-bar *,
+    .gufeng-bar *::before,
+    .gufeng-bar *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+
+  /* ========== 移动端 ========== */
+  @media (max-width: 780px) {
     .gf-sec-body { font-size: 14px; }
-    .gf-dot { width: 8px; height: 8px; }
+    .gf-sec { padding: 8px 12px; }
+    .gf-sec.gf-clo-wrap { padding: 0; }
+    .gf-sec.gf-clo-wrap .gf-sec-body.clothes { padding: 0 12px 6px; }
+  }
+
+  @media (max-width: 560px) {
+    .gufeng-bar { font-size: 13px; margin: 8px auto; border-radius: 4px; }
+    .gf-header { padding: 2px 14px 8px; }
+    .gf-header .gf-title { font-size: 20px; letter-spacing: 6px; text-indent: 6px; }
+    .mo-seal { width: 20px; height: 20px; font-size: 12px; line-height: 20px; }
+    .gf-meta { font-size: 11px; gap: 4px 10px; }
+    .gf-chars { padding: 0 12px; }
+    .gf-char-name { font-size: 15px; }
+    .gf-sec { padding: 6px 10px; }
+    .gf-sec.gf-clo-wrap { padding: 0; }
+    .gf-sec.gf-clo-wrap .gf-sec-body.clothes { padding: 0 10px 6px; }
+    .gf-sec-body { font-size: 13px; }
+    .gf-dot { width: 9px; height: 9px; }
+    .gf-aff { flex-wrap: wrap; }
+    .mo-hills { height: 30px; }
   }
 </style>
+</head>
+<body>
 
-<div class="gufeng-bar" role="region" aria-label="角色状态栏">
+<div class="gufeng-bar" role="region" aria-label="白蛇传角色状态栏">
+
+  <!-- 远山墨影 -->
+  <svg class="mo-hills" viewBox="0 0 640 46" preserveAspectRatio="none" aria-hidden="true">
+    <path class="mo-hill-b" d="M0 46 L110 14 L210 44 L330 8 L470 46 Z"/>
+    <path class="mo-hill-a" d="M-10 46 L150 22 L300 46 L420 16 L560 46 L640 40 L640 46 Z"/>
+  </svg>
 
   <div class="gf-header">
-    <div class="gf-header-row1">
-      <span class="gf-title">◆ 白蛇传 ◇</span>
+    <div class="mo-title-row">
+      <span class="gf-title">白蛇传</span>
+      <span class="mo-seal" aria-hidden="true">传</span>
     </div>
+    <div class="mo-brush" aria-hidden="true"></div>
     <div class="gf-meta">
       <span class="gf-meta-item">
         <span class="gf-meta-label">时间</span><span class="gf-meta-value" id="gf-time">午后</span>
@@ -288,10 +454,19 @@
     </div>
   </div>
 
-  <div class="gf-char" role="region" aria-label="白素贞状态">
-    <div class="gf-char-name">
-      白素贞
-      <span class="gf-loc" id="gf-bz-loc">◆ 西湖断桥</span>
+  <div class="gf-chars">
+
+  <div class="gf-tabs" role="tablist" aria-label="角色切换">
+    <button class="gf-tab active" type="button" role="tab" aria-selected="true" data-panel="gf-bz-panel">白素贞</button>
+    <button class="gf-tab" type="button" role="tab" aria-selected="false" data-panel="gf-xq-panel">小青</button>
+  </div>
+
+  <div class="gf-char active" id="gf-bz-panel" role="tabpanel" aria-label="白素贞状态">
+    <div class="mo-char-head">
+      <span class="gf-char-name">
+        白素贞
+        <span class="gf-loc" id="gf-bz-loc">西湖断桥</span>
+      </span>
     </div>
     <div class="gf-aff" role="status" aria-label="好感度">
       <span class="gf-aff-label">心意</span>
@@ -300,10 +475,10 @@
     </div>
     <div class="gf-sec">
       <div class="gf-sec-title">外貌</div>
-      <div class="gf-sec-body" id="gf-bz-appear">眉目清丽如画，唇色浅淡不施粉黛，素净得像水墨里走出来的人。眼底青碧色的蛇瞳敛在幽处，此刻正看着亭下那人。鬓边几缕碎发被细雨沾湿，贴在耳畔</div>
+      <div class="gf-sec-body" id="gf-bz-appear">眉目清丽，唇色浅淡不施粉黛，素净出尘。眼底青碧色的蛇瞳敛在幽处，此刻正看着亭下那人。鬓边几缕碎发被细雨沾湿，贴在耳畔</div>
     </div>
-    <div class="gf-sec">
-      <div class="gf-sec-title">服饰</div>
+    <details class="gf-sec gf-clo-wrap">
+      <summary class="gf-sec-title">服饰</summary>
       <div class="gf-sec-body clothes" id="gf-bz-clothes">
         <div class="gf-clo-item"><div class="gf-clo-label">外衣</div><div class="gf-clo-desc">藕荷刻丝银线褙子,直领对襟,开衩至腰下,起花八团,腰身收得极窄,袖口和裙摆下沿微微洇了一片水色</div></div>
         <div class="gf-clo-item"><div class="gf-clo-label">内搭</div><div class="gf-clo-desc">月白软烟罗中衣领口滚一道银线,襟口微敞,锁骨若隐若现,胸前衣料撑起圆润弧度,衣襟处沾了几点细密的雨珠</div></div>
@@ -313,21 +488,23 @@
         <div class="gf-clo-item"><div class="gf-clo-label">发饰</div><div class="gf-clo-desc">云髻高绾,紫玉簪簪头雕莲花,鬓边一枝鹅黄绒花沾了几颗雨珠</div></div>
         <div class="gf-clo-item"><div class="gf-clo-label">配饰</div><div class="gf-clo-desc">腰系浅金宫绦垂一块羊脂玉佩</div></div>
       </div>
-    </div>
+    </details>
     <div class="gf-sec">
       <div class="gf-sec-title">姿势</div>
       <div class="gf-sec-body" id="gf-bz-pose">立在桥亭亭柱旁,刚刚伸手接过许仙递来的一把青布伞,手指停在伞柄上</div>
     </div>
     <div class="gf-sec gf-sec-mind">
       <div class="gf-sec-title">心理</div>
-      <div class="gf-sec-body" id="gf-bz-mind">算准了今日他从断桥过。原想借这场雨把金银"遗落"给他，了却这桩千年恩情。他倒先递了伞，连一句"日后还"都没提，自己淋雨跑回去。千年的账用金银能清，一场雨下来，她倒觉得还欠上他了</div>
+      <div class="gf-sec-body" id="gf-bz-mind">千年之恩未报，又欠一把伞，须寻由头还他</div>
     </div>
   </div>
 
-  <div class="gf-char" role="region" aria-label="小青状态">
-    <div class="gf-char-name">
-      小青
-      <span class="gf-loc" id="gf-xq-loc">◆ 西湖断桥</span>
+  <div class="gf-char" id="gf-xq-panel" role="tabpanel" aria-label="小青状态">
+    <div class="mo-char-head">
+      <span class="gf-char-name">
+        小青
+        <span class="gf-loc" id="gf-xq-loc">西湖断桥</span>
+      </span>
     </div>
     <div class="gf-aff" role="status" aria-label="好感度">
       <span class="gf-aff-label">心意</span>
@@ -338,8 +515,8 @@
       <div class="gf-sec-title">外貌</div>
       <div class="gf-sec-body" id="gf-xq-appear">一张瓜子脸,眉眼灵动,笑起来颊边两个浅梨涡。瞳色刻意收敛装作寻常乌眼,只眼尾微微泛着一点翠色,像是戴了副薄薄的碧色琉璃目。嘴角微微翘着,方才冲那人喊了一嗓子,面上还带着几分促狭。发梢上挂着几滴细雨</div>
     </div>
-    <div class="gf-sec">
-      <div class="gf-sec-title">服饰</div>
+    <details class="gf-sec gf-clo-wrap">
+      <summary class="gf-sec-title">服饰</summary>
       <div class="gf-sec-body clothes" id="gf-xq-clothes">
         <div class="gf-clo-item"><div class="gf-clo-label">外衣</div><div class="gf-clo-desc">鹅黄蝉翼纱褙子薄如蝉翼,风一过便掀起来,领口敞着未系,衣带松松挽个结,衫子上星星点点沾了几点雨珠</div></div>
         <div class="gf-clo-item"><div class="gf-clo-label">内搭</div><div class="gf-clo-desc">鹅黄细葛衫交领,袖口挽起半截,衣料绷在胸前鼓鼓撑起</div></div>
@@ -349,21 +526,26 @@
         <div class="gf-clo-item"><div class="gf-clo-label">发饰</div><div class="gf-clo-desc">发髻松松挽着几缕青丝,鬓边一枝银钗雕成蝴蝶模样,钗头挂着几颗雨珠</div></div>
         <div class="gf-clo-item"><div class="gf-clo-label">配饰</div><div class="gf-clo-desc">腕上一只细银镯沾了点水渍</div></div>
       </div>
-    </div>
+    </details>
     <div class="gf-sec">
       <div class="gf-sec-title">姿势</div>
       <div class="gf-sec-body" id="gf-xq-pose">站在姐姐半步之后,刚喊完许仙借伞的话,正歪着头打量他</div>
     </div>
     <div class="gf-sec gf-sec-mind">
       <div class="gf-sec-title">心理</div>
-      <div class="gf-sec-body" id="gf-xq-mind">姐姐怀里那包金银还没递出去，这书呆子倒先借了伞、自己淋雨跑了。哼，谁要他充大方——这人连一句"日后还"都没提，倒是把伞往姐姐手里一塞就跑了</div>
+      <div class="gf-sec-body" id="gf-xq-mind">伞都给了也不图谢，这呆子淋雨跑什么</div>
     </div>
   </div>
 
-  <div class="gf-footer">—— 白蛇传 ——</div>
+  </div>
+
+  <div class="gf-footer">
+    <span class="mo-seal" aria-hidden="true">白</span>
+    <span class="mo-footer-text">白蛇传</span>
+  </div>
 </div>
 
-<script type="module">
+<script>
 
 function getStatData(){
   var all = getAllVariables() || {};
@@ -406,7 +588,7 @@ function renderClothes(d, prefix, containerId){
   if (!box) return;
   box.textContent = '';
   keys.forEach(function(k){
-    var val = _.get(d, prefix + '.' + k, '');
+    var val = _.get(d, prefix + '.服饰.' + k, '');
     if (!val) return;
     var item = document.createElement('div');
     item.className = 'gf-clo-item';
@@ -429,14 +611,14 @@ function populate(){
   setText('gf-date', _.get(d, '当前年月', '') || '南宋绍兴十七年二月');
   setText('gf-weather', _.get(d, '天气', '') || '细雨');
 
-  setText('gf-bz-loc', '◆ ' + (_.get(d, '白素贞.当前位置', '') || '西湖断桥'));
+  setText('gf-bz-loc', _.get(d, '白素贞.当前位置', '') || '西湖断桥');
   dots('gf-bz-dots', 'gf-bz-num', _.get(d, '白素贞.好感度', 0));
   setText('gf-bz-appear', _.get(d, '白素贞.外貌', ''));
   renderClothes(d, '白素贞', 'gf-bz-clothes');
   setText('gf-bz-pose', _.get(d, '白素贞.姿势', ''));
   setText('gf-bz-mind', _.get(d, '白素贞.心理', ''));
 
-  setText('gf-xq-loc', '◆ ' + (_.get(d, '小青.当前位置', '') || '西湖断桥'));
+  setText('gf-xq-loc', _.get(d, '小青.当前位置', '') || '西湖断桥');
   dots('gf-xq-dots', 'gf-xq-num', _.get(d, '小青.好感度', 0));
   setText('gf-xq-appear', _.get(d, '小青.外貌', ''));
   renderClothes(d, '小青', 'gf-xq-clothes');
@@ -444,8 +626,25 @@ function populate(){
   setText('gf-xq-mind', _.get(d, '小青.心理', ''));
 }
 
+function initTabs(){
+  var tabs = document.querySelectorAll('.gf-tab');
+  var panels = document.querySelectorAll('.gf-char');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      if (tab.classList.contains('active')) return;
+      tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      panels.forEach(function(p){ p.classList.remove('active'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      var panel = document.getElementById(tab.getAttribute('data-panel'));
+      if (panel) panel.classList.add('active');
+    });
+  });
+}
+
 async function init(){
   await waitGlobalInitialized('Mvu');
+  initTabs();
   populate();
   eventOn(Mvu.events.VARIABLE_UPDATE_ENDED, function(){
     populate();
@@ -456,3 +655,4 @@ $(errorCatched(init));
 </script>
 </body>
 </html>
+```

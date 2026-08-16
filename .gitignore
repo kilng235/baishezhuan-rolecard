@@ -9,3 +9,6 @@ Thumbs.db
 # 临时文件
 *.tmp
 *.log
+
+# 实时预览临时目录
+.tmp-preview/

@@ -118,6 +118,31 @@
           "type": "before_character_definition",
           "order": 21
         }
+      },
+      "[cot]推演协议": {
+        "scope": "catalog",
+        "part": "",
+        "keywords": [],
+        "abstract": "生成前推演协议：南宋时代校验、<user>知情隔离（不知妖身/异地之事/未提及之事）、妖身保密、行为三重支撑与输出检查",
+        "contents": [
+          {
+            "content": "---\n<cot>"
+          },
+          {
+            "file": "世界书/扮演准则/推演协议.yaml"
+          },
+          {
+            "content": "</cot>"
+          }
+        ],
+        "enabled": true,
+        "strategy": {
+          "type": "constant"
+        },
+        "position": {
+          "type": "before_character_definition",
+          "order": 22
+        }
       }
     },
     "时间线": {

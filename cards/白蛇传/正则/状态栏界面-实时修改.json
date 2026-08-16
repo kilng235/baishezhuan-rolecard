@@ -1,0 +1,15 @@
+{
+  "id": "148471d5-1333-44bb-a7a0-d84cdcd63c50",
+  "scriptName": "状态栏界面-实时",
+  "findRegex": "<StatusPlaceHolderImpl/>",
+  "replaceString": "```\n<body>\n<script>\n$('body').load('http://localhost:5500/正则/状态栏界面.html')\n</script>\n</body>\n```",
+  "trimStrings": [],
+  "placement": [2],
+  "disabled": false,
+  "markdownOnly": true,
+  "promptOnly": false,
+  "runOnEdit": true,
+  "substituteRegex": 0,
+  "minDepth": null,
+  "maxDepth": null
+}

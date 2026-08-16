@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>古风状态栏 · 通用模板</title>
+<style>
+/* ============================================================
+   古风状态栏 · 通用前端模板
+   来源：桃花项目 白蛇传 / 梅卿 两张卡的状态栏提炼
+   使用说明见文末注释「CONFIG 配置区」
+   ============================================================ */
+  .gufeng-bar {
+    /* —— 主题色变量（按卡调整） —— */
+    --ink:       #1a1a1a;   /* 墨色文字 */
+    --cinnabar:  #b83232;   /* 朱红 - 高好感/标题 */
+    --ochre:     #a08030;   /* 金黄 - 中好感 */
+    --jade:      #2a7a5a;   /* 青碧 - 低好感 */
+    --plum:      #c44050;   /* 梅红 - 页脚/点缀 */
+    --bd:        #c8b898;   /* 米色边框 */
+    --bg:        rgba(255,255,255,.35); /* 半透明背景 */
+    --paper:     #f6f1e8;   /* 宣纸底色 */
+
+    font-family: "楷体","KaiTi","STKaiti",serif;
+    max-width: 640px;
+    margin: 16px auto;
+    background: var(--paper);
+    border: 1px solid var(--bd);
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.07);
+    padding: 0;
+    overflow: hidden;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.9;
+    position: relative;
+
+    /* 宣纸纹理叠加 */
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(180,160,130,.03) 2px,
+        rgba(180,160,130,.03) 4px
+      ),
+      radial-gradient(ellipse at 20% 50%, rgba(180,160,130,.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(180,160,130,.06) 0%, transparent 50%);
+  }
+
+  /* 水墨渍装饰 - 右上角 */
+  .gufeng-bar::before {
+    content: "";
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle at 40% 40%,
+      rgba(100,80,60,.06) 0%, rgba(100,80,60,.04) 30%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* 水墨渍装饰 - 左下角 */
+  .gufeng-bar::after {
+    content: "";
+    position: absolute;
+    bottom: -30px; left: -30px;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle at 60% 60%,
+      rgba(100,80,60,.05) 0%, rgba(100,80,60,.03) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .gufeng-bar > * { position: relative; z-index: 1; }
+
+  /* ===== 头部 ===== */
+  .gf-header {
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--bd);
+    background: rgba(248,242,228,.5);
+  }
+  .gf-header-row1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: #8b7355;
+  }
+  .gf-header .gf-title {
+    font-size: 17px;
+    font-weight: bold;
+    color: #12284a;
+    letter-spacing: 3px;
+  }
+  .gf-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(139,115,85,.3);
+    font-size: 13px;
+    color: #8b7355;
+  }
+  .gf-meta-item { display: inline-flex; align-items: center; gap: 4px; }
+  .gf-meta-item .gf-meta-label { color: var(--cinnabar); font-weight: bold; letter-spacing: 1px; }
+  .gf-meta-item .gf-meta-label::after { content: "："; }
+  .gf-meta-item .gf-meta-value { color: var(--ink); }
+
+  /* ===== 角色区块 ===== */
+  .gf-char {
+    margin: 16px 24px;
+    padding: 0 0 12px;
+    border-bottom: 1px solid var(--bd);
+  }
+  .gf-char:last-of-type { border-bottom: none; margin-bottom: 0; }
+  .gf-char-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #12284a;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+  .gf-char-name .gf-loc {
+    font-weight: normal;
+    font-size: 14px;
+    color: #8b7355;
+    margin-left: 8px;
+  }
+
+  /* ===== 好感度 ===== */
+  .gf-aff {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 6px 0 10px;
+    font-size: 14px;
+    color: #8b7355;
+  }
+  .gf-aff-label { color: var(--cinnabar); font-size: 15px; margin-right: 4px; }
+  .gf-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    transition: all .4s ease;
+    background: #ddd;
+    flex-shrink: 0;
+  }
+  .gf-dot.filled { border-color: currentColor; }
+  .gf-dot.half {
+    border-color: currentColor;
+    background: linear-gradient(90deg, currentColor 50%, #ddd 50%);
+  }
+  .gf-dot.level-low.filled  { background: var(--jade);  color: var(--jade);  }
+  .gf-dot.level-low.half    { color: var(--jade);  }
+  .gf-dot.level-mid.filled  { background: var(--ochre); color: var(--ochre); }
+  .gf-dot.level-mid.half    { color: var(--ochre); }
+  .gf-dot.level-high.filled { background: var(--cinnabar); color: var(--cinnabar); }
+  .gf-dot.level-high.half   { color: var(--cinnabar); }
+  .gf-aff-num {
+    margin-left: 8px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #aaa;
+  }
+
+  /* ===== 信息区块 ===== */
+  .gf-sec {
+    margin: 8px 0;
+    background: var(--bg);
+    border: 1px solid rgba(200,184,154,.4);
+    border-radius: 3px;
+    padding: 10px 14px;
+  }
+  .gf-sec-title {
+    font-size: 14px;
+    color: var(--cinnabar);
+    font-weight: bold;
+    margin-bottom: 4px;
+    padding-left: 10px;
+    border-left: 3px solid var(--cinnabar);
+    letter-spacing: 2px;
+  }
+  .gf-sec-body {
+    font-size: 16px;
+    line-height: 2;
+    color: var(--ink);
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* ===== 服饰分行 ===== */
+  .gf-clo-item {
+    display: flex;
+    gap: 8px;
+    padding: 2px 0;
+    line-height: 1.9;
+    align-items: flex-start;
+  }
+  .gf-clo-item + .gf-clo-item {
+    border-top: 1px dashed rgba(184,50,50,.15);
+    margin-top: 2px;
+    padding-top: 4px;
+  }
+  .gf-clo-label {
+    flex-shrink: 0;
+    min-width: 3.2em;
+    color: var(--cinnabar);
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1.9;
+    padding-top: 2px;
+  }
+  .gf-clo-label::after { content: "："; }
+  .gf-clo-desc { flex: 1; word-break: break-word; overflow-wrap: break-word; }
+
+  /* ===== 心理区块（区别于普通区块） ===== */
+  .gf-sec.gf-sec-mind {
+    background: rgba(122,84,42,.06);
+    border-color: rgba(122,84,42,.25);
+    border-style: dashed;
+  }
+  .gf-sec.gf-sec-mind .gf-sec-title { color: #6b4a2a; border-left-color: #6b4a2a; letter-spacing: 1px; }
+  .gf-sec.gf-sec-mind .gf-sec-body { font-style: italic; color: #3a2c1e; }
+
+  /* ===== 页脚 ===== */
+  .gf-footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    color: var(--plum);
+    letter-spacing: 2px;
+    border-top: 1px solid rgba(200,184,154,.3);
+    font-style: italic;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 640px) {
+    .gufeng-bar { font-size: 14px; margin: 8px auto; }
+    .gf-header { padding: 8px 12px; }
+    .gf-header-row1 { flex-wrap: wrap; gap: 4px; }
+    .gf-header .gf-title { font-size: 16px; }
+    .gf-meta { font-size: 12px; gap: 4px 10px; }
+    .gf-char { margin: 12px 12px; }
+    .gf-sec { padding: 8px 10px; }
+    .gf-sec-body { font-size: 15px; }
+    .gf-dot { width: 10px; height: 10px; }
+  }
+  @media (max-width: 400px) {
+    .gf-header .gf-title { font-size: 15px; letter-spacing: 1px; }
+    .gf-char-name { font-size: 15px; }
+    .gf-aff { flex-wrap: wrap; }
+    .gf-sec-body { font-size: 14px; }
+    .gf-dot { width: 8px; height: 8px; }
+  }
+</style>
+
+<div class="gufeng-bar" role="region" aria-label="角色状态栏">
+
+  <!-- ============ 头部（时间/年月/天气/时空） ============ -->
+  <div class="gf-header">
+    <div class="gf-header-row1">
+      <span class="gf-title" id="gf-title">◆ 标题 ◇</span>
+    </div>
+    <div class="gf-meta" id="gf-meta">
+      <span class="gf-meta-item"><span class="gf-meta-label">时间</span><span class="gf-meta-value" id="gf-time">--</span></span>
+      <span class="gf-meta-item"><span class="gf-meta-label">年月</span><span class="gf-meta-value" id="gf-date">--</span></span>
+      <span class="gf-meta-item"><span class="gf-meta-label">天气</span><span class="gf-meta-value" id="gf-weather">--</span></span>
+    </div>
+  </div>
+
+  <!-- ============ 角色区块 1（复制此块可扩展角色，改 id 前缀 + CONFIG 登记） ============ -->
+  <div class="gf-char" role="region" aria-label="角色1状态">
+    <div class="gf-char-name">
+      <span id="gf-c1-name">角色1</span>
+      <span class="gf-loc" id="gf-c1-loc">◆ --</span>
+    </div>
+    <!-- 好感度（如不需要可删除整块） -->
+    <div class="gf-aff" role="status" aria-label="好感度">
+      <span class="gf-aff-label">心意</span>
+      <span id="gf-c1-dots" role="img" aria-hidden="true"></span>
+      <span class="gf-aff-num" id="gf-c1-num">-- / 100</span>
+    </div>
+    <div class="gf-sec">
+      <div class="gf-sec-title">外貌</div>
+      <div class="gf-sec-body" id="gf-c1-appear">--</div>
+    </div>
+    <div class="gf-sec">
+      <div class="gf-sec-title">服饰</div>
+      <div class="gf-sec-body" id="gf-c1-clothes"><!-- renderClothes 动态填充 --></div>
+    </div>
+    <div class="gf-sec">
+      <div class="gf-sec-title">姿势</div>
+      <div class="gf-sec-body" id="gf-c1-pose">--</div>
+    </div>
+    <div class="gf-sec gf-sec-mind">
+      <div class="gf-sec-title">心理</div>
+      <div class="gf-sec-body" id="gf-c1-mind">--</div>
+    </div>
+  </div>
+
+  <!-- ============ 角色区块 2（双角色时启用；单角色请删除） ============ -->
+  <!--
+  <div class="gf-char" role="region" aria-label="角色2状态">
+    <div class="gf-char-name">
+      <span id="gf-c2-name">角色2</span>
+      <span class="gf-loc" id="gf-c2-loc">◆ --</span>
+    </div>
+    <div class="gf-aff" role="status" aria-label="好感度">
+      <span class="gf-aff-label">心意</span>
+      <span id="gf-c2-dots" role="img" aria-hidden="true"></span>
+      <span class="gf-aff-num" id="gf-c2-num">-- / 100</span>
+    </div>
+    <div class="gf-sec">
+      <div class="gf-sec-title">外貌</div>
+      <div class="gf-sec-body" id="gf-c2-appear">--</div>
+    </div>
+    <div class="gf-sec">
+      <div class="gf-sec-title">服饰</div>
+      <div class="gf-sec-body" id="gf-c2-clothes"></div>
+    </div>
+    <div class="gf-sec">
+      <div class="gf-sec-title">姿势</div>
+      <div class="gf-sec-body" id="gf-c2-pose">--</div>
+    </div>
+    <div class="gf-sec gf-sec-mind">
+      <div class="gf-sec-title">心理</div>
+      <div class="gf-sec-body" id="gf-c2-mind">--</div>
+    </div>
+  </div>
+  -->
+
+  <div class="gf-footer">—— 页脚 ——</div>
+</div>
+
+<script type="module">
+/* ============================================================
+   CONFIG 配置区 —— 按卡调整，其余代码无需改动
+   ============================================================ */
+var CONFIG = {
+  // 头部标题
+  title: '◆ 标题 ◇',
+  // 页脚文字
+  footer: '—— 页脚 ——',
+
+  // 系统变量读取方式：
+  //   'flat'  = 顶层平铺（白蛇传：stat_data.当前时间 / 当前年月 / 天气）
+  //   'nest'  = 系统变量容器（梅卿：stat_data.系统变量.时空切片 / 日期 / 时间段）
+  sysMode: 'flat',
+
+  // 角色配置（数组，按需增减）
+  //   key    : stat_data 中的角色键名
+  //   id     : 状态栏元素 id 前缀（与 HTML 中的 gf-c1/gf-c2 对应）
+  //   name   : 显示名
+  //   hasAff : 是否有好感度（true 显示圆点）
+  chars: [
+    { key: '角色1', id: 'c1', name: '角色1', hasAff: true },
+    // { key: '角色2', id: 'c2', name: '角色2', hasAff: true },
+  ],
+};
+
+/* ============================================================
+   工具函数
+   ============================================================ */
+
+/* 安全路径读取：自动剥离 stat_data. 前缀 + 空值降级 */
+function safeGet(root, path, def){
+  var p = String(path || '');
+  if (p.indexOf('stat_data.') === 0) p = p.slice('stat_data.'.length);
+  var val = _.get(root, p);
+  if (val === undefined || val === null || val === '') return def;
+  return val;
+}
+
+function setText(id, val){
+  var el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+
+/* 好感度圆点：10 格三色分级渲染 */
+function dots(containerId, numId, val){
+  var n = Math.max(0, Math.min(100, parseInt(val) || 0));
+  var f = Math.floor(n / 10);
+  var h = (n % 10) >= 5;
+  var box = document.getElementById(containerId);
+  if (!box) return;
+  box.textContent = '';
+  for (var i = 0; i < 10; i++) {
+    var dot = document.createElement('span');
+    var level = i < 3 ? 'level-low' : (i < 7 ? 'level-mid' : 'level-high');
+    var cls = 'gf-dot ' + level;
+    if (i < f) cls += ' filled';
+    else if (i === f && h) cls += ' half';
+    dot.className = cls;
+    box.appendChild(dot);
+  }
+  var numEl = document.getElementById(numId);
+  if (numEl) numEl.textContent = n + ' / 100';
+}
+
+/* ============================================================
+   服饰分行渲染
+   ⚠️ 路径约定（统一）：prefix = 角色键名（如 '白素贞' / '梅绛雪'）
+      函数内部固定拼 '.服饰.'，勿在调用处把 '.服饰' 塞进 prefix，
+      否则会重蹈"路径少跳一层"的 bug（白蛇传历史教训）。
+   ============================================================ */
+var CLOTH_KEYS = ['外衣','内搭','贴身层','下装','鞋袜','发饰','配饰'];
+function renderClothes(root, prefix, containerId){
+  var box = document.getElementById(containerId);
+  if (!box) return;
+  box.textContent = '';
+  CLOTH_KEYS.forEach(function(k){
+    var val = safeGet(root, prefix + '.服饰.' + k, '');
+    if (!val) return;
+    var item = document.createElement('div');
+    item.className = 'gf-clo-item';
+    var label = document.createElement('div');
+    label.className = 'gf-clo-label';
+    label.textContent = k;
+    var desc = document.createElement('div');
+    desc.className = 'gf-clo-desc';
+    desc.textContent = val;
+    item.appendChild(label);
+    item.appendChild(desc);
+    box.appendChild(item);
+  });
+}
+
+/* ============================================================
+   主渲染
+   ============================================================ */
+function render(){
+  try {
+    var all = getAllVariables() || {};
+    var d = _.get(all, 'stat_data', {});
+    if (!d || Object.keys(d).length === 0) {
+      var m = getVariables({ type: 'message' }) || {};
+      d = _.get(m, 'stat_data', {});
+    }
+    var SYS = CONFIG.sysMode === 'nest' ? '系统变量.' : '';
+
+    // 头部标题
+    setText('gf-title', CONFIG.title);
+
+    // 头部 meta（时间/年月/天气 按 sysMode 读取）
+    if (CONFIG.sysMode === 'nest') {
+      setText('gf-time', safeGet(d, SYS + '时间段', '') || '--');
+      setText('gf-date', safeGet(d, SYS + '日期', '') || '--');
+      setText('gf-weather', '--');
+    } else {
+      setText('gf-time', safeGet(d, '当前时间', '') || '--');
+      setText('gf-date', safeGet(d, '当前年月', '') || '--');
+      setText('gf-weather', safeGet(d, '天气', '') || '--');
+    }
+
+    // 各角色区块
+    CONFIG.chars.forEach(function(ch){
+      var prefix = ch.key;
+      setText('gf-' + ch.id + '-name', ch.name);
+      setText('gf-' + ch.id + '-loc', '◆ ' + safeGet(d, prefix + '.当前位置', ''));
+      if (ch.hasAff) {
+        dots('gf-' + ch.id + '-dots', 'gf-' + ch.id + '-num', safeGet(d, prefix + '.好感度', 0));
+      }
+      setText('gf-' + ch.id + '-appear', safeGet(d, prefix + '.外貌', ''));
+      renderClothes(d, prefix, 'gf-' + ch.id + '-clothes');
+      setText('gf-' + ch.id + '-pose', safeGet(d, prefix + '.姿势', ''));
+      setText('gf-' + ch.id + '-mind', safeGet(d, prefix + '.心理', ''));
+    });
+  } catch(e) {
+    /* MVU 未就绪或变量缺失：保留 HTML 默认值 */
+  }
+}
+
+/* 初始化：等 MVU 就绪 → 首次渲染 → 订阅变量更新事件 */
+async function init(){
+  await waitGlobalInitialized('Mvu');
+  render();
+  eventOn(Mvu.events.VARIABLE_UPDATE_ENDED, function(){
+    render();
+  });
+}
+
+$(errorCatched(init));
+</script>
+</body>
+</html>
