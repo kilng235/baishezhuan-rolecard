@@ -5,7 +5,7 @@ export const Schema = z.object({
   白素贞: z.object({
     当前位置: z.string().prefault('西湖断桥'),
     好感度: z.coerce.number().transform(v => _.clamp(v, 0, 100)).prefault(60),
-    外貌: z.string().prefault('眉目清丽如画，唇色浅淡不施粉黛，素净得像水墨里走出来的人。眼底青碧色的蛇瞳敛在幽处，此刻正看着亭下那人。鬓边几缕碎发被细雨沾湿，贴在耳畔'),
+    外貌: z.string().prefault('眉目清丽，唇色浅淡不施粉黛，素净出尘。眼底青碧色的蛇瞳敛在幽处，此刻正望着雨幕里那人的背影。鬓边几缕碎发被细雨沾湿，贴在耳畔'),
     服饰: z.object({
       外衣: z.string().prefault('藕荷刻丝银线褙子,直领对襟,开衩至腰下,起花八团,腰身收得极窄,袖口和裙摆下沿微微洇了一片水色'),
       内搭: z.string().prefault('月白软烟罗中衣领口滚一道银线,襟口微敞,锁骨若隐若现,胸前衣料撑起圆润弧度,衣襟处沾了几点细密的雨珠'),
@@ -15,13 +15,13 @@ export const Schema = z.object({
       发饰: z.string().prefault('云髻高绾,紫玉簪簪头雕莲花,鬓边一枝鹅黄绒花沾了几颗雨珠'),
       配饰: z.string().prefault('腰系浅金宫绦垂一块羊脂玉佩'),
     }).prefault({}),
-    姿势: z.string().prefault('立在桥亭亭柱旁,刚刚伸手接过许仙递来的一把青布伞,手指停在伞柄上'),
+    姿势: z.string().prefault('持伞立在桥亭亭柱旁,手指仍搭在伞柄上,望着雨幕里那人的背影'),
     心理: z.string().prefault(''),
   }).prefault({}),
   小青: z.object({
     当前位置: z.string().prefault('西湖断桥'),
     好感度: z.coerce.number().transform(v => _.clamp(v, 0, 100)).prefault(20),
-    外貌: z.string().prefault('一张瓜子脸,眉眼灵动,笑起来颊边两个浅梨涡。瞳色刻意收敛装作寻常乌眼,只眼尾微微泛着一点翠色,像是戴了副薄薄的碧色琉璃目。嘴角微微翘着,方才冲那人喊了一嗓子,面上还带着几分促狭。发梢上挂着几滴细雨'),
+    外貌: z.string().prefault('一张瓜子脸,眉眼灵动,笑起来颊边两个浅梨涡。瞳色刻意收敛装作寻常乌眼,只眼尾微微泛着一点翠色,像是戴了副薄薄的碧色琉璃目。方才催伞那一嗓子喊得又急又脆,此刻撇着嘴,面上还带着几分促狭。发梢上挂着几滴细雨'),
     服饰: z.object({
       外衣: z.string().prefault('鹅黄蝉翼纱褙子薄如蝉翼,风一过便掀起来,领口敞着未系,衣带松松挽个结,衫子上星星点点沾了几点雨珠'),
       内搭: z.string().prefault('鹅黄细葛衫交领,袖口挽起半截,衣料绷在胸前鼓鼓撑起'),
@@ -31,7 +31,7 @@ export const Schema = z.object({
       发饰: z.string().prefault('发髻松松挽着几缕青丝,鬓边一枝银钗雕成蝴蝶模样,钗头挂着几颗雨珠'),
       配饰: z.string().prefault('腕上一只细银镯沾了点水渍'),
     }).prefault({}),
-    姿势: z.string().prefault('站在姐姐半步之后,刚喊完许仙借伞的话,正歪着头打量他'),
+    姿势: z.string().prefault('站在姐姐半步之后,歪着头打量雨里那个借出伞就跑的身影'),
     心理: z.string().prefault(''),
   }).prefault({}),
 });
