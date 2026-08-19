@@ -1,6 +1,6 @@
 export const Schema = z.object({
   当前时间: z.string().prefault('午后'),
-  当前年月: z.string().prefault('南宋绍兴十七年二月'),
+  当前年月: z.string().prefault('南宋绍兴十七年二月十五日'),
   天气: z.string().prefault('细雨'),
   白素贞: z.object({
     当前位置: z.string().prefault('西湖断桥'),

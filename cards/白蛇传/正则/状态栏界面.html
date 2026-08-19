@@ -446,7 +446,7 @@
         <span class="gf-meta-label">时间</span><span class="gf-meta-value" id="gf-time">午后</span>
       </span>
       <span class="gf-meta-item">
-        <span class="gf-meta-label">年月</span><span class="gf-meta-value" id="gf-date">南宋绍兴十七年二月</span>
+        <span class="gf-meta-label">年月</span><span class="gf-meta-value" id="gf-date">南宋绍兴十七年二月十五日</span>
       </span>
       <span class="gf-meta-item">
         <span class="gf-meta-label">天气</span><span class="gf-meta-value" id="gf-weather">细雨</span>
@@ -608,7 +608,7 @@ function populate(){
   var d = getStatData();
 
   setText('gf-time', _.get(d, '当前时间', '') || '午后');
-  setText('gf-date', _.get(d, '当前年月', '') || '南宋绍兴十七年二月');
+  setText('gf-date', _.get(d, '当前年月', '') || '南宋绍兴十七年二月十五日');
   setText('gf-weather', _.get(d, '天气', '') || '细雨');
 
   setText('gf-bz-loc', _.get(d, '白素贞.当前位置', '') || '西湖断桥');
